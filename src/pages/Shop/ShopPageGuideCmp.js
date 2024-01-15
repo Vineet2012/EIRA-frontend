@@ -1,0 +1,72 @@
+import { Box, Divider, IconButton, Switch, Typography } from "@mui/material";
+import { IconWithTextSimpleChipCmp } from "../../components/Chips";
+import { AddIconCmp, LocationIconCmp } from "../../components/Icons";
+
+export default function ShopPageGuideCmp() {
+  return (
+    <Box>
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        px={2}
+        py={1}
+        borderRadius={4}
+        border="1px solid rgba(33, 33, 33, 0.2)"
+      >
+        <Typography fontWeight={500} color="text.light">
+          Do you want to add a tourist guide into your retreat package?
+        </Typography>
+        <Switch defaultChecked />
+      </Box>
+      <Box display="flex" flexWrap="wrap" rowGap={4} columnGap={{ md: 1, lg: 4 }} mt={4}>
+        <CardCmp />
+        <CardCmp />
+        <CardCmp />
+      </Box>
+    </Box>
+  );
+}
+
+function CardCmp() {
+  return (
+    <Box
+      display="flex"
+      flexDirection="column"
+      p="3px"
+      width={280}
+      border="1px solid rgba(196, 223, 182, 1)"
+      borderRadius={4}
+    >
+      <Box height={200} width="100%" borderRadius={3} overflow="hidden">
+        <img
+          src="https://www.private-guides.com/guide-in-portugal/lisbon-trip-road-5949/guide-portugal-5949.jpg"
+          alt="guide"
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        />
+      </Box>
+      <Box display="flex" flexDirection="column" rowGap={2} p={2}>
+        <Box display="flex" alignItems="center" justifyContent="space-between">
+          <Box>
+            <Typography variant="h5Alt" fontWeight={600}>
+              Britney Jhonson
+            </Typography>
+            <IconWithTextSimpleChipCmp
+              icon={LocationIconCmp}
+              label="From South East Asia"
+              color="text.light"
+            />
+          </Box>
+          <IconButton variant="rounded">
+            <AddIconCmp />
+          </IconButton>
+        </Box>
+        <Divider />
+        <Typography variant="body2">
+          She has an experience of 8 years as a tourist guide. She can translate 12 language and
+          help you enjoy your trip.
+        </Typography>
+      </Box>
+    </Box>
+  );
+}
