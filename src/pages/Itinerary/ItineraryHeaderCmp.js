@@ -213,14 +213,14 @@ function ImgLayout3() {
     <Box display="flex" height={height} columnGap={2}>
       <Box borderRadius={3} overflow="hidden" flex={1}>
         <img
-          src="https://cityfurnish.com/blog/wp-content/uploads/2023/08/beach-near-hotel-min.jpg"
+          src="https://media.gq.com/photos/597f9c900a1a9d4a0b9e4f56/4:3/w_1775,h_1332,c_limit/2017_07_GQ_PortugalBeaches_3x2_tout.jpg"
           alt=""
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
       </Box>
       <Box borderRadius={3} overflow="hidden" flex={1}>
         <img
-          src="https://cityfurnish.com/blog/wp-content/uploads/2023/08/beach-near-hotel-min.jpg"
+          src="https://travellemming.com/wp-content/uploads/Best-Places-to-Visit-in-Portugal.jpg"
           alt=""
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
