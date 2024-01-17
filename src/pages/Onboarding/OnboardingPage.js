@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
 export default function OnboardingPage() {
@@ -12,7 +12,10 @@ export default function OnboardingPage() {
       alignItems="center"
       justifyContent="center"
     >
-      <Box width="40%" py={8}>
+      <Box position="fixed" top={40} left={40}>
+        <Typography variant="h3">EIRA</Typography>
+      </Box>
+      <Box py={8} width="100%">
         <Outlet />
       </Box>
     </Box>

@@ -16,8 +16,8 @@ export default function ShopPageActivityCmp() {
       />
       <ShopPageCardCmp
         title="Speed boating from Velana International Airport"
-        content="          Huruvalhi, Maldives."
-        image="https://www.aethos.com/ericeira/wp-content/uploads/AethosEriceira3956_2000x1300-1024x684.jpg"
+        content="Huruvalhi, Maldives."
+        image="https://www.aethos.com/ericeira/wp-content/uploads/Aethos-Ericeira_pool_DSC7180-Edytuj_web-1024x683.jpg"
         onOpenTimeDialog={() => setOpenTimeDialog(true)}
         added
         tag

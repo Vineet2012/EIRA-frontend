@@ -6,7 +6,7 @@ export default function OnboardingWelcomeCmp() {
   const navigate = useNavigate();
 
   return (
-    <Box>
+    <Box width="40%" margin="0 auto">
       <Box textAlign="center">
         <Typography variant="h3Alt" fontWeight={700}>
           Welcome to EIRA

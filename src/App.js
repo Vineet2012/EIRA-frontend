@@ -1,7 +1,6 @@
-import { ThemeProvider } from "@mui/material";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import GeneralLayoutCmp from "./components/GeneralLayouCmp";
-import { theme } from "./config/theme";
+import ScrollToTopCmp from "./components/ScrollToTopCmp";
 import CreateRetreatPage from "./pages/CreateRetreat/CreateRetreatPage";
 import HomePage from "./pages/Home/HomePage";
 import ItineraryPage from "./pages/Itinerary/ItineraryPage";
@@ -26,40 +25,39 @@ import ToolboxTopicPage from "./pages/Toolbox/ToolboxTopicPage";
 
 export default function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<GeneralLayoutCmp />}>
-            <Route path="home" element={<HomePage />} />
-            <Route path="create-retreat" element={<CreateRetreatPage />} />
-            <Route path="my-trips">
-              <Route path="" element={<MyTripsPage />} />
-              <Route path="itinerary/:tripId" element={<ItineraryPage />} />
-            </Route>
-            <Route path="shop" element={<ShopPage />} />
-            <Route path="toolbox">
-              <Route path="" element={<ToolboxPage />} />
-              <Route path="topic/:topicId" element={<ToolboxTopicPage />} />
-              <Route path="topic/:topicId/:postId" element={<ToolboxPostPage />} />
-            </Route>
-            <Route path="support" element={<SupportPage />}>
-              <Route path="" element={<SupportInitialPageCmp />} />
-              <Route path=":search" element={<SupportSearchResultsCmp />} />
-            </Route>
-            <Route path="settings" element={<SettingsPage />} />
+    <>
+      <Routes>
+        <Route path="/" element={<GeneralLayoutCmp />}>
+          <Route path="home" element={<HomePage />} />
+          <Route path="create-retreat" element={<CreateRetreatPage />} />
+          <Route path="my-trips">
+            <Route path="" element={<MyTripsPage />} />
+            <Route path="itinerary/:tripId" element={<ItineraryPage />} />
           </Route>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/verify-otp" element={<VerifyOtpPage />} />
-          <Route path="/new-password" element={<NewPasswordPage />} />
-          <Route path="/password-changed" element={<PasswordChangedPage />} />
-          <Route path="/onboarding" element={<OnboardingPage />}>
-            <Route path="" element={<OnboardingWelcomeCmp />} />
-            <Route path="form" element={<OnboardingFormCmp />} />
+          <Route path="shop" element={<ShopPage />} />
+          <Route path="toolbox">
+            <Route path="" element={<ToolboxPage />} />
+            <Route path="topic/:topicId" element={<ToolboxTopicPage />} />
+            <Route path="topic/:topicId/:postId" element={<ToolboxPostPage />} />
           </Route>
-        </Routes>
-      </Router>
-    </ThemeProvider>
+          <Route path="support" element={<SupportPage />}>
+            <Route path="" element={<SupportInitialPageCmp />} />
+            <Route path=":search" element={<SupportSearchResultsCmp />} />
+          </Route>
+          <Route path="settings" element={<SettingsPage />} />
+        </Route>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/verify-otp" element={<VerifyOtpPage />} />
+        <Route path="/new-password" element={<NewPasswordPage />} />
+        <Route path="/password-changed" element={<PasswordChangedPage />} />
+        <Route path="/onboarding" element={<OnboardingPage />}>
+          <Route path="" element={<OnboardingWelcomeCmp />} />
+          <Route path="form" element={<OnboardingFormCmp />} />
+        </Route>
+      </Routes>
+      <ScrollToTopCmp />
+    </>
   );
 }

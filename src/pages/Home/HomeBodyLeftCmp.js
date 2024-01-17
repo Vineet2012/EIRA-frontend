@@ -148,7 +148,7 @@ function RetreatCardCmp() {
             maxHeight: "100%",
             objectFit: "cover",
           }}
-          src="https://images.pexels.com/photos/2486168/pexels-photo-2486168.jpeg?auto=compress&cs=tinysrgb&w=600"
+          src="https://www.aethos.com/ericeira/wp-content/uploads/AethosEriceira3956_2000x1300-1024x684.jpg"
         />
       </Box>
       <Box p={2} display="flex" flexDirection="column">

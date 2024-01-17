@@ -1,9 +1,11 @@
-import { Box, Button, Divider, Grid, Link, Typography } from "@mui/material";
+import { Box, Button, Grid, Link, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IconWithTextSimpleChipCmp } from "../../components/Chips";
 import {
+  AchievementsIconCmp,
   CreateRetreatIconCmp,
+  EmployeeEngagementIconSvg,
   FireIconCmp,
   GolfFlagIconCmp,
   HealthAidIconCmp,
@@ -40,37 +42,55 @@ function PopularRetreatsCmp() {
   return (
     <PageSectionLayoutCmp title="Popular Retreats">
       <Box display="flex" flexDirection="column" rowGap={2}>
-        {[...new Array(3)].map((_, idx) => {
-          return (
+        <PopularRetreatsCardCmp
+          imgUrl="https://www.aethos.com/ericeira/wp-content/uploads/AethosEriceira4094_2000x1300-768x512.jpg"
+          title="The Standard Huruvalhi - Dream Hotel Bismark Prime Locationed"
+          location="Portugal"
+          chips={
             <>
-              <PopularRetreatsCardCmp key={idx} />
-              {idx !== 2 && <Divider />}
+              <IconWithTextSimpleChipCmp icon={EmployeeEngagementIconSvg} label="Employee En..." />
+              <IconWithTextSimpleChipCmp icon={MembersIconCmp} label="25 Members" />
             </>
-          );
-        })}
+          }
+        />
+        <PopularRetreatsCardCmp
+          imgUrl="https://aethos.com/ericeira/wp-content/uploads/Joana-Andrade_02-1-683x1024.jpg"
+          title="Ericeira Beach"
+          location="Portugal"
+          chips={
+            <>
+              <IconWithTextSimpleChipCmp icon={GolfFlagIconCmp} label="Team Building" />
+              <IconWithTextSimpleChipCmp icon={MembersIconCmp} label="15 Members" />
+            </>
+          }
+        />
+        <PopularRetreatsCardCmp
+          imgUrl="https://www.aethos.com/ericeira/wp-content/uploads/Aethos-Ericeira_interior_lobby_DSC0080-2_PIONweb_1200x1800-768x1024.jpg"
+          title="The Location: A Modern Design Hotel above the Ocean"
+          location="Portugal"
+          chips={
+            <>
+              <IconWithTextSimpleChipCmp icon={AchievementsIconCmp} label="Celebrating ..." />
+              <IconWithTextSimpleChipCmp icon={MembersIconCmp} label="30 Members" />
+            </>
+          }
+        />
       </Box>
     </PageSectionLayoutCmp>
   );
 }
 
-function PopularRetreatsCardCmp() {
+function PopularRetreatsCardCmp({ imgUrl, title, location, chips }) {
   const imgSize = 90;
 
   return (
     <Box display="flex" alignItems="center" columnGap={1}>
       <Box width={imgSize} height={imgSize} borderRadius={4} overflow="hidden" flexShrink={0}>
-        <img
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          src="https://t3.ftcdn.net/jpg/03/24/73/92/360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg"
-        />
+        <img style={{ width: "100%", height: "100%", objectFit: "cover" }} src={imgUrl} />
       </Box>
       <Box display="flex" flexDirection="column" rowGap={1}>
         <Box>
-          <IconWithTextSimpleChipCmp
-            icon={LocationIconCmp}
-            label="Country in South Asia"
-            color="text.light"
-          />
+          <IconWithTextSimpleChipCmp icon={LocationIconCmp} label={location} color="text.light" />
           <Box pt={0.5} />
           <Typography
             variant="body1"
@@ -82,12 +102,11 @@ function PopularRetreatsCardCmp() {
               WebkitLineClamp: 1,
             }}
           >
-            The Standard Huruvalhi - Dream Hotel Bismark Prime Locationed
+            {title}
           </Typography>
         </Box>
         <Box display="flex" columnGap={2}>
-          <IconWithTextSimpleChipCmp icon={GolfFlagIconCmp} label="Team Building" />
-          <IconWithTextSimpleChipCmp icon={MembersIconCmp} label="25 Members" />
+          {chips}
         </Box>
       </Box>
     </Box>

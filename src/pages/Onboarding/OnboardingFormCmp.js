@@ -1,6 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ArrowHorizontalIconCmp } from "../../components/Icons";
+import SubscriptionPlansCmp from "../../components/SubscriptionPlansCmp";
 import { usePageStepHook } from "../../hooks/usePageStepHook";
 import OnboardingFormStep1Cmp from "./OnboardingFormStep1Cmp";
 import OnboardingFormStep2Cmp from "./OnboardingFormStep2Cmp";
@@ -12,7 +13,14 @@ export default function OnboardingFormCmp() {
   const { stepNo, handleNext, handlePrev } = usePageStepHook();
 
   return (
-    <Box display="flex" flexDirection="column" rowGap={1} alignItems="center">
+    <Box
+      display="flex"
+      flexDirection="column"
+      rowGap={1}
+      alignItems="center"
+      width={stepNo === 3 ? "60%" : "40%"}
+      margin="0 auto"
+    >
       <StepCounterCmp stepNo={stepNo} />
       <Box bgcolor="#fff" borderRadius={4} width="100%">
         <Box p={4}>
@@ -21,7 +29,7 @@ export default function OnboardingFormCmp() {
               <OnboardingFormStep1Cmp />,
               <OnboardingFormStep2Cmp />,
               <OnboardingFormStep3Cmp />,
-              <div>subscriptions info</div>,
+              <SubsStepTemp />,
               <OnboardingFormStep5Cmp />,
             ][stepNo]
           }
@@ -103,6 +111,14 @@ function ActionButtonsCmp({ stepNo, handleNext, handlePrev, handleSubmit }) {
       >
         Continue
       </Button>
+    </Box>
+  );
+}
+
+function SubsStepTemp() {
+  return (
+    <Box>
+      <SubscriptionPlansCmp />
     </Box>
   );
 }

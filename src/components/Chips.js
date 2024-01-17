@@ -35,6 +35,12 @@ export function IconWithTextSimpleChipCmp({
         variant={large ? "body1" : "body2"}
         color={textColor ?? color ?? "primary.main"}
         fontWeight={fontWeight}
+        sx={{
+          display: "-webkit-box",
+          overflow: "hidden",
+          WebkitBoxOrient: "vertical",
+          WebkitLineClamp: 1,
+        }}
       >
         {label}
       </Typography>
