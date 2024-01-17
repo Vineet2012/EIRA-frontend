@@ -40,7 +40,7 @@ export default function ItineraryListCmp() {
           image="https://images.letsway.com/live/tr:w-750/https://storage.googleapis.com/kouto-api-media-live/2023/2/0b919dd63a37052ea28b314f4c3a8f1ffc25759ca520432b"
         />
         <CardCmp image="https://images.letsway.com/live/tr:w-750/https://storage.googleapis.com/kouto-api-media-live/2023/2/8d3ff1d19532e1fd8d3d84a19d79aa514a14a653534e5de8" />
-        <CardCmp image="https://images.letsway.com/live/tr:w-750/https://storage.googleapis.com/kouto-api-media-live/2023/2/0b919dd63a37052ea28b314f4c3a8f1ffc25759ca520432b" />
+        <CardCmp image="https://www.portugalresident.com/wp-content/uploads/2020/01/tourism_tourists_Lisbon_lisboa.jpg" />
       </Box>
       <Box
         bgcolor="secondary.main"
