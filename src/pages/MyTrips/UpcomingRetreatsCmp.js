@@ -8,15 +8,24 @@ export default function UpcomingRetreatsCmp() {
     <Box>
       <Typography variant="h5">Upcoming Retreats</Typography>
       <Box display="flex" flexDirection="column" rowGap={2} mt={2}>
-        <CardCmp />
-        <CardCmp />
-        <CardCmp />
+        <CardCmp
+          image="https://www.aethos.com/ericeira/wp-content/uploads/Aethos-Ericeira_interior_lobby_DSC0080-2_PIONweb_1200x1800-768x1024.jpg"
+          title="The Location: A Modern Design Hotel above the Ocean"
+        />
+        <CardCmp
+          image="https://www.aethos.com/ericeira/wp-content/uploads/Aethos-Ericeira_ONDA_DSC0017-4_PIONweb_2000x1200-1024x683.jpg"
+          title="Culinary Delights: A taste of sea with a touch of land"
+        />
+        <CardCmp
+          image="https://www.aethos.com/ericeira/wp-content/uploads/Aethos-Ericeira_rooms_garden-terrace-room_DSC0011-2-HDR_PIONweb_2000x1200-1-1024x683.jpg"
+          title="Wellness Amenities: Wellbeing for all senses"
+        />
       </Box>
     </Box>
   );
 }
 
-function CardCmp() {
+function CardCmp({ image, title }) {
   const navigate = useNavigate();
 
   return (
@@ -42,14 +51,14 @@ function CardCmp() {
       <Box display="flex" alignItems="center">
         <Box height={120} width={120} borderRadius={4} overflow="hidden" flexShrink={0}>
           <img
-            src="https://images.prestigeonline.com/wp-content/uploads/sites/8/2022/08/25183234/298975449_382499477332261_6469935543158544615_n.jpeg?tr=w-1200,h-900"
+            src={image}
             alt="hey"
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
         </Box>
         <Box display="flex" flexDirection="column" mx={3}>
           <Typography variant="h5Alt" fontWeight={500}>
-            Hotel Milad Maldives
+            {title}
           </Typography>
           <Box py={0.4} />
           <Typography variant="body2">

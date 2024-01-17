@@ -50,9 +50,31 @@ export default function PastRetreatsCmp() {
           sx={{ scrollBehavior: "smooth", "::-webkit-scrollbar": { display: "none" } }}
         >
           <Box display="flex" columnGap={cardGap / 8}>
-            {[0, 2, 1, 3, 4, 5].map((_, idx) => (
-              <CardCmp key={idx} id={idx} onClickReview={() => setOpen(true)} />
-            ))}
+            <CardCmp
+              onClickReview={() => setOpen(true)}
+              image="https://www.aethos.com/ericeira/wp-content/uploads/Aethos-Ericeira-bathroom-0104_web-819x1024.jpg"
+              title="The Location: A Modern Design Hotel above the Ocean"
+            />
+            <CardCmp
+              onClickReview={() => setOpen(true)}
+              image="https://www.aethos.com/ericeira/wp-content/uploads/Aethos-Ericeira_rooms_garden-terrace-room_DSC0011-2-HDR_PIONweb_2000x1200-1-1024x683.jpg"
+              title="Culinary Delights: A taste of sea with a touch of land"
+            />
+            <CardCmp
+              onClickReview={() => setOpen(true)}
+              image="https://www.aethos.com/ericeira/wp-content/uploads/Aethos-Ericeira-bed-closeup-0509-1024x682.jpg"
+              title="The Location: A Modern Design Hotel above the Ocean"
+            />
+            <CardCmp
+              onClickReview={() => setOpen(true)}
+              image="https://www.aethos.com/ericeira/wp-content/uploads/Aethos-Ericeira_ONDA_DSC0017-4_PIONweb_2000x1200-1024x683.jpg"
+              title="Culinary Delights: A taste of sea with a touch of land"
+            />
+            <CardCmp
+              onClickReview={() => setOpen(true)}
+              image="https://www.aethos.com/ericeira/wp-content/uploads/Aethos-Ericeira-bathroom-0104_web-819x1024.jpg"
+              title="Wellness Amenities: Wellbeing for all senses"
+            />
           </Box>
         </Box>
         <Box>
@@ -66,7 +88,7 @@ export default function PastRetreatsCmp() {
   );
 }
 
-function CardCmp({ id, onClickReview }) {
+function CardCmp({ id, onClickReview, image, title }) {
   return (
     <Box
       border="1px solid #C4DFB6"
@@ -83,13 +105,13 @@ function CardCmp({ id, onClickReview }) {
             height: "100%",
             objectFit: "cover",
           }}
-          src="https://t3.ftcdn.net/jpg/03/24/73/92/360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg"
+          src={image}
         />
       </Box>
       <Box p={2}>
         <Box display="flex" flexDirection="column">
           <Typography variant="h5Alt" fontWeight={500}>
-            Hotel Milad Maldives
+            {title}
           </Typography>
           <Box display="flex" mt={1} />
           <Typography variant="body2">

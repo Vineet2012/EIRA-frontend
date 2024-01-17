@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import AuthCmp from "./components/AuthCmp";
 import GeneralLayoutCmp from "./components/GeneralLayouCmp";
 import ScrollToTopCmp from "./components/ScrollToTopCmp";
 import CreateRetreatPage from "./pages/CreateRetreat/CreateRetreatPage";
@@ -28,6 +29,7 @@ export default function App() {
     <>
       <Routes>
         <Route path="/" element={<GeneralLayoutCmp />}>
+          <Route path="" element={<AuthCmp />} />
           <Route path="home" element={<HomePage />} />
           <Route path="create-retreat" element={<CreateRetreatPage />} />
           <Route path="my-trips">
