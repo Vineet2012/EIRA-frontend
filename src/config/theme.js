@@ -150,6 +150,11 @@ let myTheme = createTheme({
     },
     h6: {
       fontFamily: "Lora",
+      fontSize: 18,
+    },
+    h6Alt: {
+      fontSize: 18,
+      fontFamily: "Inter",
     },
     body1Alt: {
       fontFamily: "Lora",

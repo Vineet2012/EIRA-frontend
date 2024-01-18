@@ -1,8 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
+import { BackButtonCmp } from "../../../components/Buttons";
 import { IconWithTextSimpleChipCmp } from "../../../components/Chips";
 import {
   CalendarIconCmp,
+  ChevronArrowIconCmp,
   FireIconCmp,
   HeartIconCmp,
   ListIconCmp,
@@ -10,6 +12,7 @@ import {
 } from "../../../components/Icons";
 import { itineraryViewEnum } from "../../../utils/enums";
 import { ItineraryPageContext } from "../ItineraryPageContext";
+import ItineraryCalendarCmp from "./ItineraryCalendarCmp";
 import ItineraryListCmp from "./ItineraryListCmp";
 import ShareItineraryDialogCmp from "./ShareItineraryDialogCmp";
 
@@ -126,48 +129,73 @@ function RightCmp() {
   const [openDialog, setOpenDialog] = React.useState(false);
   const { viewType, setViewType } = React.useContext(ItineraryPageContext);
 
-  const selectedProps = {};
-  const unSelectedProps = {};
+  const selectedProps = {
+    contained: true,
+    bgcolor: "primary.main",
+    color: "#fff",
+  };
+  const unSelectedProps = {
+    border: "1px solid rgba(106, 133, 92, 1)",
+    borderRadius: 20,
+    py: 1,
+    px: 2,
+  };
 
   return (
-    <Box border="1px solid rgba(196, 223, 182, 1)" borderRadius={4} overflow="hidden">
+    <Box border="1px solid rgba(196, 223, 182, 1)" borderRadius="16px 16px 0 0">
       <Box
         bgcolor="secondary.main"
         p={2}
         display="flex"
         alignItems="center"
         justifyContent="space-between"
+        borderRadius="16px 16px 0 0"
       >
-        <Box display="flex" alignItems="center" columnGap={2}>
-          <Box>
-            <IconWithTextSimpleChipCmp
-              icon={ListIconCmp}
-              label="List"
-              contained
-              bgcolor="primary.main"
-              color="#fff"
-              onClick={() => setViewType(itineraryViewEnum.list)}
-            />
+        {viewType === itineraryViewEnum.calendar && (
+          <BackButtonCmp onClick={() => setViewType(itineraryViewEnum.list)} />
+        )}
+        {viewType === itineraryViewEnum.calendar && (
+          <Box
+            display="flex"
+            textAlign="center"
+            justifyContent="center"
+            alignItems="center"
+            color="primary.main"
+          >
+            <Box sx={{ cursor: "pointer" }} display="flex" columnGap={1}>
+              <CalendarIconCmp />
+              <Typography fontWeight={500} color="inherit">
+                Jan 2023
+              </Typography>
+              <ChevronArrowIconCmp />
+            </Box>
           </Box>
+        )}
+        <Box display="flex" alignItems="center" columnGap={2}>
+          <IconWithTextSimpleChipCmp
+            icon={ListIconCmp}
+            label="List"
+            onClick={() => setViewType(itineraryViewEnum.list)}
+            {...(viewType === itineraryViewEnum.list ? selectedProps : unSelectedProps)}
+          />
           <IconWithTextSimpleChipCmp
             icon={CalendarIconCmp}
             label="Calendar"
             onClick={() => setViewType(itineraryViewEnum.calendar)}
-            border="1px solid rgba(106, 133, 92, 1)"
-            borderRadius={20}
+            {...(viewType === itineraryViewEnum.calendar ? selectedProps : unSelectedProps)}
+          />
+        </Box>
+        {viewType === itineraryViewEnum.list && (
+          <IconWithTextSimpleChipCmp
+            icon={ShareIconCmp}
+            label="Share Itinerary"
+            onClick={() => setOpenDialog(true)}
             py={1}
             px={2}
           />
-        </Box>
-        <IconWithTextSimpleChipCmp
-          icon={ShareIconCmp}
-          label="Share Itinerary"
-          onClick={() => setOpenDialog(true)}
-          py={1}
-          px={2}
-        />
+        )}
       </Box>
-      <ItineraryListCmp />
+      {viewType === itineraryViewEnum.list ? <ItineraryListCmp /> : <ItineraryCalendarCmp />}
       <ShareItineraryDialogCmp open={openDialog} handleClose={() => setOpenDialog(false)} />
     </Box>
   );

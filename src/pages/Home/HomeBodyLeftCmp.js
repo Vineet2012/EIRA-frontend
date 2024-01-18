@@ -172,7 +172,7 @@ function RetreatCardCmp() {
           <IconWithTextSimpleChipCmp icon={MembersIconCmp} label="25 Members" />
         </Box>
       </Box>
-      <IconButton sx={{ alignSelf: "flex-end" }} variant="rounded" sx={{ float: "right" }}>
+      <IconButton sx={{ alignSelf: "flex-end", float: "right" }} variant="rounded">
         <ArrowHorizontalIconCmp fontSize="small" />
       </IconButton>
     </Box>

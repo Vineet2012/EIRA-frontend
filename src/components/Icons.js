@@ -312,8 +312,10 @@ export function TransportIconCmp(props) {
 }
 
 export function LaunchIconCmp(props) {
+  const direction = props.direction === "down" ? "rotate(90deg)" : "";
+
   return (
-    <SvgIcon {...props}>
+    <SvgIcon {...props} sx={{ ...props.sx, transform: direction }}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"

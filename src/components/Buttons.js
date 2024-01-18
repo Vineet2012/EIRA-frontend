@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { IconWithTextSimpleChipCmp } from "./Chips";
 import { ArrowHorizontalIconCmp } from "./Icons";
 
-export function BackButtonCmp() {
+export function BackButtonCmp({ onClick }) {
   const navigate = useNavigate();
 
   return (
@@ -10,7 +10,7 @@ export function BackButtonCmp() {
       icon={ArrowHorizontalIconCmp}
       iconProps={{ direction: "left" }}
       label="Back"
-      onClick={() => navigate(-1)}
+      onClick={onClick ?? (() => navigate(-1))}
       color="primary"
       fontWeight={700}
     />
