@@ -14,6 +14,10 @@ export function IconWithTextSimpleChipCmp({
   textColor,
   large,
   onClick,
+  border,
+  borderRadius,
+  px,
+  py,
 }) {
   const Icon = icon;
 
@@ -24,11 +28,12 @@ export function IconWithTextSimpleChipCmp({
       flexDirection={reverse && "row-reverse"}
       columnGap={columnGap}
       bgcolor={contained && bgcolor}
-      px={contained && 2}
-      py={contained && 1}
-      borderRadius={contained && 12}
+      px={px ?? (contained && 2)}
+      py={py ?? (contained && 1)}
+      borderRadius={borderRadius ?? (contained && 12)}
       sx={{ cursor: onClick && "pointer" }}
       onClick={onClick}
+      border={border}
     >
       <Icon color="primary" fontSize="small" sx={{ color }} {...iconProps} />
       <Typography

@@ -8,10 +8,14 @@ import {
   ListIconCmp,
   ShareIconCmp,
 } from "../../../components/Icons";
+import { itineraryViewEnum } from "../../../utils/enums";
+import { ItineraryPageContext } from "../ItineraryPageContext";
 import ItineraryListCmp from "./ItineraryListCmp";
 import ShareItineraryDialogCmp from "./ShareItineraryDialogCmp";
 
 export default function ItineraryTabItineraryCmp() {
+  const { viewType } = React.useContext(ItineraryPageContext);
+
   return (
     <Box>
       <Box display="flex" columnGap={4}>
@@ -27,9 +31,11 @@ export default function ItineraryTabItineraryCmp() {
         />
       </Box>
       <Box display="flex" mt={4} columnGap={4}>
-        <Box flex={0.8}>
-          <LeftCmp />
-        </Box>
+        {viewType === itineraryViewEnum.list && (
+          <Box flex={0.8}>
+            <LeftCmp />
+          </Box>
+        )}
         <Box flex={2}>
           <RightCmp />
         </Box>
@@ -118,6 +124,10 @@ function RetreatListItemCmp({ selected }) {
 
 function RightCmp() {
   const [openDialog, setOpenDialog] = React.useState(false);
+  const { viewType, setViewType } = React.useContext(ItineraryPageContext);
+
+  const selectedProps = {};
+  const unSelectedProps = {};
 
   return (
     <Box border="1px solid rgba(196, 223, 182, 1)" borderRadius={4} overflow="hidden">
@@ -129,28 +139,33 @@ function RightCmp() {
         justifyContent="space-between"
       >
         <Box display="flex" alignItems="center" columnGap={2}>
-          <Box sx={{ cursor: "pointer" }}>
+          <Box>
             <IconWithTextSimpleChipCmp
               icon={ListIconCmp}
               label="List"
               contained
               bgcolor="primary.main"
               color="#fff"
+              onClick={() => setViewType(itineraryViewEnum.list)}
             />
           </Box>
-          <Box
-            sx={{ cursor: "pointer" }}
+          <IconWithTextSimpleChipCmp
+            icon={CalendarIconCmp}
+            label="Calendar"
+            onClick={() => setViewType(itineraryViewEnum.calendar)}
             border="1px solid rgba(106, 133, 92, 1)"
             borderRadius={20}
             py={1}
             px={2}
-          >
-            <IconWithTextSimpleChipCmp icon={CalendarIconCmp} label="Calendar" />
-          </Box>
+          />
         </Box>
-        <Box sx={{ cursor: "pointer" }} py={1} px={2} onClick={() => setOpenDialog(true)}>
-          <IconWithTextSimpleChipCmp icon={ShareIconCmp} label="Share Itinerary" />
-        </Box>
+        <IconWithTextSimpleChipCmp
+          icon={ShareIconCmp}
+          label="Share Itinerary"
+          onClick={() => setOpenDialog(true)}
+          py={1}
+          px={2}
+        />
       </Box>
       <ItineraryListCmp />
       <ShareItineraryDialogCmp open={openDialog} handleClose={() => setOpenDialog(false)} />

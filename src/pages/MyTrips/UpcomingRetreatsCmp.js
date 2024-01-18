@@ -2,48 +2,50 @@ import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { IconWithTextSimpleChipCmp } from "../../components/Chips";
 import { ArrowHorizontalIconCmp, CalendarIconCmp } from "../../components/Icons";
+import { myTripsDBTemp } from "../../temp/myTripsDBTemp";
 
 export default function UpcomingRetreatsCmp() {
   return (
     <Box>
       <Typography variant="h5">Upcoming Retreats</Typography>
       <Box display="flex" flexDirection="column" rowGap={2} mt={2}>
-        <CardCmp
-          image="https://www.aethos.com/ericeira/wp-content/uploads/Aethos-Ericeira_interior_lobby_DSC0080-2_PIONweb_1200x1800-768x1024.jpg"
-          title="The Location: A Modern Design Hotel above the Ocean"
-        />
-        <CardCmp
-          image="https://www.aethos.com/ericeira/wp-content/uploads/Aethos-Ericeira_ONDA_DSC0017-4_PIONweb_2000x1200-1024x683.jpg"
-          title="Culinary Delights: A taste of sea with a touch of land"
-        />
-        <CardCmp
-          image="https://www.aethos.com/ericeira/wp-content/uploads/Aethos-Ericeira_rooms_garden-terrace-room_DSC0011-2-HDR_PIONweb_2000x1200-1-1024x683.jpg"
-          title="Wellness Amenities: Wellbeing for all senses"
-        />
+        {myTripsDBTemp.map((el, idx) => (
+          <CardCmp
+            key={idx}
+            id={el.id}
+            image={el.images[0]}
+            title={el.name}
+            team={el.team}
+            day={el.day}
+            month={el.month}
+            duration={el.duration}
+            dates={el.dates}
+          />
+        ))}
       </Box>
     </Box>
   );
 }
 
-function CardCmp({ image, title }) {
+function CardCmp({ image, title, team, duration, month, day, dates, id }) {
   const navigate = useNavigate();
 
   return (
     <Box display="flex" alignItems="center" px={3} py={2} columnGap={4}>
-      <Box display="flex" alignItems="center" columnGap={2} flexShrink={0}>
+      <Box display="flex" alignItems="center" columnGap={2} flexShrink={0} width={240}>
         <Box textAlign="center">
           <Typography variant="body2" color="text.light">
-            Jan
+            {month}
           </Typography>
           <Typography variant="h2Alt" fontWeight={700}>
-            10
+            {day}
           </Typography>
         </Box>
         <Box bgcolor="text.light" width="1px" height={28} borderRadius={2} />
         <Box>
-          <Typography variant="body2">Retreat with Design Team</Typography>
+          <Typography variant="body2">Retreat with {team}</Typography>
           <Typography variant="body2" color="text.light">
-            7 Days, 6 Nights
+            {duration}
           </Typography>
         </Box>
       </Box>
@@ -66,10 +68,7 @@ function CardCmp({ image, title }) {
             Huruvalhi, Maldives.
           </Typography>
           <Box py={0.4} />
-          <IconWithTextSimpleChipCmp
-            icon={CalendarIconCmp}
-            label={"Fri, 11 Jan 2024 - Sat, 15 Jan 2024"}
-          />
+          <IconWithTextSimpleChipCmp icon={CalendarIconCmp} label={dates} />
         </Box>
       </Box>
       <Box display="flex" alignItems="center" columnGap={3} flexShrink={0}>
@@ -77,7 +76,7 @@ function CardCmp({ image, title }) {
         <Button
           variant="outlined"
           endIcon={<ArrowHorizontalIconCmp />}
-          onClick={() => navigate("itinerary/1")}
+          onClick={() => navigate("itinerary/" + id)}
         >
           itinerary
         </Button>

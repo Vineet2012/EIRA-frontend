@@ -141,8 +141,8 @@ function LeftCmp() {
             <Grid item xs={4}>
               <OverallRatingsCmp />
             </Grid>
-            {[...new Array(5)].map((_, el) => (
-              <Grid item xs={4}>
+            {[...new Array(5)].map((_, idx) => (
+              <Grid key={idx} item xs={4}>
                 <ReviewCmp />
               </Grid>
             ))}
@@ -222,7 +222,7 @@ function OverallRatingsCmp() {
       </Box>
       <Box display="flex" flexDirection="column" width="100%" rowGap={0.5} mt={1}>
         {[...new Array(5)].map((_, idx) => (
-          <Box display="flex" alignItems="center" width="100%">
+          <Box key={idx} display="flex" alignItems="center" width="100%">
             <Box width={24}>
               <Typography variant="body2">{5 - idx}</Typography>
             </Box>

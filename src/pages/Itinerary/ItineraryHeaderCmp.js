@@ -10,32 +10,32 @@ import {
   LocationIconCmp,
   MembersIconCmp,
 } from "../../components/Icons";
+import { ItineraryPageContext } from "./ItineraryPageContext";
 
 export default function ItineraryHeaderCmp() {
   const navigate = useNavigate();
+  const { retreat } = React.useContext(ItineraryPageContext);
 
   return (
     <Box>
-      <Box onClick={() => navigate(-1)} sx={{ cursor: "pointer" }}>
-        <BackButtonCmp />
-      </Box>
+      <BackButtonCmp />
       <Box display="flex" alignItems="center" justifyContent="space-between" mt={2}>
         <Typography variant="h2Alt" fontWeight={700}>
-          Club Quater Hotel in San Fransicso
+          {retreat.name}
         </Typography>
         <Box display="flex" alignItems="center" columnGap={2}>
           <IconWithTextSimpleChipCmp
             icon={LocationIconCmp}
-            label="Country in South Asia"
+            label={retreat.location}
             contained
             color="primary.main"
           />
-          <IconWithTextSimpleChipCmp
+          {/* <IconWithTextSimpleChipCmp
             icon={CalendarIconCmp}
             label="7 Days, 8 Nights"
             contained
             color="primary.main"
-          />
+          /> */}
         </Box>
       </Box>
       <Box display="flex" alignItems="center" columnGap={2} mt={2}>
@@ -44,30 +44,30 @@ export default function ItineraryHeaderCmp() {
           label="Team Building"
           color="primary.main"
         />
-        <IconWithTextSimpleChipCmp icon={MembersIconCmp} label="25 members" color="primary.main" />
+        <IconWithTextSimpleChipCmp
+          icon={MembersIconCmp}
+          label={retreat.members + " members"}
+          color="primary.main"
+        />
         <IconWithTextSimpleChipCmp
           icon={CalendarIconCmp}
-          label="7 Days, 8 Nights"
+          label={retreat.duration}
           color="primary.main"
         />
       </Box>
-      <ImagesCmp />
+      <ImagesCmp images={retreat.images} />
     </Box>
   );
 }
 
-function ImagesCmp() {
+function ImagesCmp({ images }) {
   const [open, setOpen] = React.useState(false);
   const height = 300;
 
   return (
     <Box display="flex" columnGap={2} height={height} my={4}>
       <Box borderRadius={3} overflow="hidden" flex={1}>
-        <img
-          src="https://cityfurnish.com/blog/wp-content/uploads/2023/08/beach-near-hotel-min.jpg"
-          alt=""
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        />
+        <img src={images[0]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
       </Box>
       <Box
         borderRadius={3}
@@ -81,25 +81,21 @@ function ImagesCmp() {
       >
         <Box borderRadius={3} overflow="hidden" flex={1}>
           <img
-            src="https://images.adsttc.com/media/images/5510/ce9d/e58e/ce15/1100/035b/medium_jpg/015_Side_View_03.jpg?1427164812"
+            src={images[1]}
             alt=""
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
         </Box>
         <Box borderRadius={3} overflow="hidden" flex={1}>
           <img
-            src="https://as1.ftcdn.net/v2/jpg/02/93/35/18/1000_F_293351862_cIrcudl46dYHw22I4QzCK9HCz7uS8m3a.jpg"
+            src={images[2]}
             alt=""
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
         </Box>
       </Box>
       <Box borderRadius={3} overflow="hidden" flex={1.6} position="relative">
-        <img
-          src="https://www.stairsupplies.com/wp-content/uploads/2015/08/StairSupplies_HeroImage_FamousStaircasesInFilm_v1.jpg"
-          alt=""
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        />
+        <img src={images[3]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         <Box position="absolute" bottom={12} right={12}>
           <Button
             variant="contained"
@@ -114,12 +110,12 @@ function ImagesCmp() {
           </Button>
         </Box>
       </Box>
-      <ImagesOverlayCmp open={open} handleClose={() => setOpen(false)} />
+      <ImagesOverlayCmp images={images} open={open} handleClose={() => setOpen(false)} />
     </Box>
   );
 }
 
-function ImagesOverlayCmp({ open, handleClose }) {
+function ImagesOverlayCmp({ images, open, handleClose }) {
   if (!open) return null;
   return (
     <Box
@@ -141,25 +137,22 @@ function ImagesOverlayCmp({ open, handleClose }) {
         margin="32px auto"
         rowGap={2}
       >
-        <ImgLayout1 />
-        <ImgLayout2 />
-        <ImgLayout3 />
+        <ImgLayout1 img1={images[0]} img2={images[1]} img3={images[2]} />
+        <ImgLayout2 img={images[3]} />
+        <ImgLayout3 img1={images[4]} img2={images[5]} />
+        <ImgLayout1 img1={images[6]} img2={images[7]} img3={images[8]} />
       </Box>
     </Box>
   );
 }
 
-function ImgLayout1() {
+function ImgLayout1({ img1, img2, img3 }) {
   const height = 300;
 
   return (
     <Box display="flex" height={height} columnGap={2}>
       <Box borderRadius={3} overflow="hidden" flex={1}>
-        <img
-          src="https://cityfurnish.com/blog/wp-content/uploads/2023/08/beach-near-hotel-min.jpg"
-          alt=""
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        />
+        <img src={img1} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
       </Box>
       <Box
         borderRadius={3}
@@ -172,58 +165,38 @@ function ImgLayout1() {
         rowGap={2}
       >
         <Box borderRadius={3} overflow="hidden" flex={1}>
-          <img
-            src="https://images.adsttc.com/media/images/5510/ce9d/e58e/ce15/1100/035b/medium_jpg/015_Side_View_03.jpg?1427164812"
-            alt=""
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
+          <img src={img2} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         </Box>
         <Box borderRadius={3} overflow="hidden" flex={1}>
-          <img
-            src="https://as1.ftcdn.net/v2/jpg/02/93/35/18/1000_F_293351862_cIrcudl46dYHw22I4QzCK9HCz7uS8m3a.jpg"
-            alt=""
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
+          <img src={img3} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         </Box>
       </Box>
     </Box>
   );
 }
 
-function ImgLayout2() {
+function ImgLayout2({ img }) {
   const height = 200;
 
   return (
     <Box display="flex" height={height} columnGap={2}>
       <Box borderRadius={3} overflow="hidden" flex={1}>
-        <img
-          src="https://www.stairsupplies.com/wp-content/uploads/2015/08/StairSupplies_HeroImage_FamousStaircasesInFilm_v1.jpg"
-          alt=""
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        />
+        <img src={img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
       </Box>
     </Box>
   );
 }
 
-function ImgLayout3() {
+function ImgLayout3({ img1, img2 }) {
   const height = 200;
 
   return (
     <Box display="flex" height={height} columnGap={2}>
       <Box borderRadius={3} overflow="hidden" flex={1}>
-        <img
-          src="https://media.gq.com/photos/597f9c900a1a9d4a0b9e4f56/4:3/w_1775,h_1332,c_limit/2017_07_GQ_PortugalBeaches_3x2_tout.jpg"
-          alt=""
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        />
+        <img src={img1} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
       </Box>
       <Box borderRadius={3} overflow="hidden" flex={1}>
-        <img
-          src="https://travellemming.com/wp-content/uploads/Best-Places-to-Visit-in-Portugal.jpg"
-          alt=""
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        />
+        <img src={img2} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
       </Box>
     </Box>
   );
