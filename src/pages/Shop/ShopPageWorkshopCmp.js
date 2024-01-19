@@ -18,7 +18,7 @@ export default function ShopPageWorkshopCmp() {
         onOpenTimeDialog={() => setOpenTimeDialog(true)}
       />
       <ShopPageCardCmp
-        title="Marketing Workshop"
+        title="Online-Marketing Workshop with Marie"
         content="Relish a unique blend of relaxation and luxury on this exotic vacation at the Standard"
         image="/images/workshop-2.png"
         timeFromHotel={"1.5km from hotel"}
