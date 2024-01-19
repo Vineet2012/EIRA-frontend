@@ -51,9 +51,9 @@ function RetreatsCmp() {
       <CalendarCmp />
       <Box display="flex" mt={4} columnGap={4}>
         <Box display="flex" flexDirection="column" rowGap={2}>
-          {[...new Array(3)].map((_, idx) => {
-            return <RetreatListItemCmp key={idx} isSelected={idx === 1} />;
-          })}
+          <RetreatListItemCmp teamName={"Design team"} date={"10"} />
+          <RetreatListItemCmp isSelected teamName={"Sales Team"} date={"12"} />
+          <RetreatListItemCmp teamName={"Product Team"} date={"16"} />
         </Box>
         <RetreatCardCmp />
       </Box>
@@ -108,7 +108,7 @@ function CalendarCmp() {
   );
 }
 
-function RetreatListItemCmp({ isSelected }) {
+function RetreatListItemCmp({ isSelected, teamName, date }) {
   return (
     <Box
       display="flex"
@@ -121,15 +121,15 @@ function RetreatListItemCmp({ isSelected }) {
     >
       <Box textAlign="center">
         <Typography variant="body2" color={isSelected ? "primary" : "text.light"}>
-          Jan
+          Feb
         </Typography>
         <Typography variant="h2Alt" fontWeight={700} color={isSelected && "primary"}>
-          10
+          {date}
         </Typography>
       </Box>
       <Box bgcolor="text.light" width="1px" height="50%" borderRadius={2} />
       <Box>
-        <Typography variant="body2">Retreat with Design Team</Typography>
+        <Typography variant="body2">Retreat with {teamName}</Typography>
         <Typography variant="body2" color="text.light">
           7 Days, 6 Nights
         </Typography>
@@ -148,19 +148,15 @@ function RetreatCardCmp() {
             maxHeight: "100%",
             objectFit: "cover",
           }}
-          src="https://www.aethos.com/ericeira/wp-content/uploads/AethosEriceira3956_2000x1300-1024x684.jpg"
+          src="https://www.telegraph.co.uk/content/dam/Travel/hotels/2021/April/tivoli-carvoeiro-algarve-portugal-pr-p.jpg"
         />
       </Box>
       <Box p={2} display="flex" flexDirection="column">
         <Typography variant="h5Alt" fontWeight={600}>
-          The Standard Huruvalhi - Dream...
+          Ocean View Retreat Hotel
         </Typography>
         <Box display="flex" alignItems="center" mt={1} columnGap={0.5}>
-          <IconWithTextSimpleChipCmp
-            icon={LocationIconCmp}
-            label="Country in South Asia"
-            color="text.light"
-          />
+          <IconWithTextSimpleChipCmp icon={LocationIconCmp} label="Portugal" color="text.light" />
         </Box>
         <Divider sx={{ my: 2 }} />
         <Typography variant="body2">

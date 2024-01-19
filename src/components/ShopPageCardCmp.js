@@ -3,7 +3,17 @@ import React from "react";
 import { IconWithTextSimpleChipCmp } from "./Chips";
 import { AddIconCmp, CalendarIconCmp, CheckIconCmp, LocationIconCmp, TimeIconCmp } from "./Icons";
 
-export default function ShopPageCardCmp({ title, content, image, added, tag, onOpenTimeDialog }) {
+export default function ShopPageCardCmp({
+  title,
+  content,
+  image,
+  added,
+  tag,
+  onOpenTimeDialog,
+  timeFromHotel,
+  hours,
+  time,
+}) {
   return (
     <Box display="flex" alignItems="center" columnGap={4}>
       <Box
@@ -42,11 +52,11 @@ export default function ShopPageCardCmp({ title, content, image, added, tag, onO
         </Typography>
         <Typography variant="body2">{content}</Typography>
         <Box display="flex" alignItems="center" columnGap={2}>
-          <IconWithTextSimpleChipCmp icon={LocationIconCmp} label="1.9 km from lake" />
-          <IconWithTextSimpleChipCmp icon={TimeIconCmp} label="1 hour" />
+          <IconWithTextSimpleChipCmp icon={LocationIconCmp} label={timeFromHotel} />
+          <IconWithTextSimpleChipCmp icon={TimeIconCmp} label={hours} />
           <IconWithTextSimpleChipCmp
             icon={CalendarIconCmp}
-            label="5:00 PM"
+            label={time}
             onClick={onOpenTimeDialog}
           />
         </Box>

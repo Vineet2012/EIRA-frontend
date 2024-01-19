@@ -43,8 +43,8 @@ function PopularRetreatsCmp() {
     <PageSectionLayoutCmp title="Popular Retreats">
       <Box display="flex" flexDirection="column" rowGap={2}>
         <PopularRetreatsCardCmp
-          imgUrl="https://www.aethos.com/ericeira/wp-content/uploads/AethosEriceira4094_2000x1300-768x512.jpg"
-          title="The Standard Huruvalhi - Dream Hotel Bismark Prime Locationed"
+          imgUrl="https://www.telegraph.co.uk/content/dam/Travel/hotels/2021/April/tivoli-carvoeiro-algarve-portugal-pr-p.jpg"
+          title="Ocean View Retreat Hotel"
           location="Portugal"
           chips={
             <>
@@ -54,9 +54,9 @@ function PopularRetreatsCmp() {
           }
         />
         <PopularRetreatsCardCmp
-          imgUrl="https://aethos.com/ericeira/wp-content/uploads/Joana-Andrade_02-1-683x1024.jpg"
-          title="Ericeira Beach"
-          location="Portugal"
+          imgUrl="https://www.telegraph.co.uk/content/dam/Travel/hotels/articles/fifty-best-hotels/hotel-cap-eden-roc.jpg?imwidth=680"
+          title="Beachfront Boutique Hotel"
+          location="France"
           chips={
             <>
               <IconWithTextSimpleChipCmp icon={GolfFlagIconCmp} label="Team Building" />
@@ -65,9 +65,9 @@ function PopularRetreatsCmp() {
           }
         />
         <PopularRetreatsCardCmp
-          imgUrl="https://www.aethos.com/ericeira/wp-content/uploads/Aethos-Ericeira_interior_lobby_DSC0080-2_PIONweb_1200x1800-768x1024.jpg"
-          title="The Location: A Modern Design Hotel above the Ocean"
-          location="Portugal"
+          imgUrl="https://robbreport.com/wp-content/uploads/2023/04/Dravuni-Residence-Pool-.jpg"
+          title="Luxurious Beach Retreat"
+          location="Italy"
           chips={
             <>
               <IconWithTextSimpleChipCmp icon={AchievementsIconCmp} label="Celebrating ..." />
@@ -114,10 +114,10 @@ function PopularRetreatsCardCmp({ imgUrl, title, location, chips }) {
 }
 
 const tempData = [
-  { label: "Camping Guide", icon: <FireIconCmp /> },
-  { label: "Health & Aid", icon: <HealthAidIconCmp /> },
-  { label: "Pets Guide", icon: <PetsIconCmp /> },
-  { label: "Transport Guide", icon: <TransportIconCmp /> },
+  { label: "Retreat checklist", icon: <FireIconCmp /> },
+  { label: "Remote Team Management", icon: <HealthAidIconCmp /> },
+  { label: "Team Brand Strategy Development", icon: <PetsIconCmp /> },
+  { label: "Personal Branding Workshop", icon: <TransportIconCmp /> },
 ];
 
 function CultureToolboxCmp() {
