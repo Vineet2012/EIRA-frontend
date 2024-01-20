@@ -3,12 +3,14 @@ import { Box, Grid, IconButton, Typography } from "@mui/material";
 import React from "react";
 import { IconWithTextSimpleChipCmp } from "../../../components/Chips";
 import { CalendarIconCmp, LaunchIconCmp } from "../../../components/Icons";
+import { time24HToAmPm } from "../../../utils/formatters";
 
 const cellHeight = 48;
+const headerHeight = 60;
 const popupWidth = 320;
 
-const startTime = 10;
-const endTime = 24;
+const startTime = 8;
+const endTime = 23;
 const timePerDay = endTime - startTime;
 const cellsPerDate = timePerDay;
 const maxDates = 9;
@@ -19,31 +21,42 @@ const startDay = new Date().getDay();
 export default function ItineraryCalendarCmp() {
   return (
     <Box bgcolor="rgba(245, 251, 245, 1)">
-      <Grid container>
-        {[...new Array(maxDates)].map((_, idx) => (
-          <DateHeadingCmp key={idx} date={(startDate + idx) % 31 ?? 1} day={(startDay + idx) % 7} />
-        ))}
-
-        {[...new Array(1000)].map((_, idx) => {
-          if (idx >= cellsPerDate * maxDates) return null;
-
-          const currDate = startDate + Math.floor(idx % maxDates);
-          const currTime = startTime + Math.floor(idx / maxDates);
-
-          const match = events.find((el) => el.date === currDate && el.time === currTime);
-          if (match?.blank) return null;
-
-          return (
-            <CellCmp
+      <Box display="flex">
+        <Box display="flex" flexDirection="column" flexShrink={0}>
+          {[...new Array(timePerDay + 1)].map((_, idx) => (
+            <TimeCellCmp key={idx} time={idx === 0 ? -1 : startTime + idx - 1} mt={idx === 1} />
+          ))}
+        </Box>
+        <Grid container>
+          {[...new Array(maxDates)].map((_, idx) => (
+            <DateHeadingCmp
               key={idx}
-              temp={idx === 15}
-              data={match?.data}
-              span={match?.span}
-              mt={currTime === startTime}
+              date={(startDate + idx) % 31 ?? 1}
+              day={(startDay + idx) % 7}
             />
-          );
-        })}
-      </Grid>
+          ))}
+
+          {[...new Array(1000)].map((_, idx) => {
+            if (idx >= cellsPerDate * maxDates) return null;
+
+            const currDate = startDate + Math.floor(idx % maxDates);
+            const currTime = startTime + Math.floor(idx / maxDates);
+
+            const match = events.find((el) => el.date === currDate && el.time === currTime);
+            if (match?.blank) return null;
+
+            return (
+              <CellCmp
+                key={idx}
+                temp={idx === 15}
+                data={match?.data}
+                span={match?.span}
+                mt={currTime === startTime}
+              />
+            );
+          })}
+        </Grid>
+      </Box>
     </Box>
   );
 }
@@ -117,6 +130,7 @@ function DateHeadingCmp({ date, day }) {
         borderColor="rgba(239, 239, 239, 1)"
         py={1}
         bgcolor="#fff"
+        height={headerHeight}
       >
         <Typography variant="h6Alt" fontWeight={500}>
           {date}
@@ -126,6 +140,26 @@ function DateHeadingCmp({ date, day }) {
         </Typography>
       </Box>
     </Grid>
+  );
+}
+
+function TimeCellCmp({ time, mt }) {
+  return (
+    <Box
+      height={time === -1 ? headerHeight : cellHeight}
+      mt={mt && 2}
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      bgcolor="#fff"
+      border="1px solid"
+      borderColor="rgba(239, 239, 239, 1)"
+      px={2}
+    >
+      <Typography variant="body2" fontWeight={500} color="text.light">
+        {time !== -1 && time24HToAmPm(time)}
+      </Typography>
+    </Box>
   );
 }
 

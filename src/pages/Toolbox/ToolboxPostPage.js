@@ -1,5 +1,5 @@
 import { Box, Button, Divider, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import { BackButtonCmp } from "../../components/Buttons";
 import { IconWithTextSimpleChipCmp } from "../../components/Chips";
 import {
@@ -9,10 +9,87 @@ import {
   TimeIconCmp,
 } from "../../components/Icons";
 import { PageMainContentsLayoutCmp, PageSectionLayoutCmp } from "../../components/Layouts";
+import RadioCmp from "../../components/RadioCmp";
+
+const trackerData = [
+  {
+    heading: "Interpretation and Definitions",
+    content: (
+      <>
+        "Juneteenth is known to some in the United States as the country’s “second Independence
+        Day.” Observed each year on June 19, the holiday marks the end of slavery in Texas at the
+        end of the Civil War."
+        <br />
+        <br />
+        "For more than 150 years, African American communities across the country have observed this
+        holiday—from social gatherings in Emancipation Parks to church services and other events.
+        But Juneteenth has increasingly been celebrated nationwide; in 2021 it became the first new
+        federal holiday since the establishment of Martin Luther King Jr."
+      </>
+    ),
+  },
+  {
+    heading: "Acknowledgment",
+    content: (
+      <>
+        "Juneteenth is known to some in the United States as the country’s “second Independence
+        Day.” Observed each year on June 19, the holiday marks the end of slavery in Texas at the
+        end of the Civil War."
+        <br />
+        <br />
+        "For more than 150 years, African American communities across the country have observed this
+        holiday—from social gatherings in Emancipation Parks to church services and other events.
+        But Juneteenth has increasingly been celebrated nationwide; in 2021 it became the first new
+        federal holiday since the establishment of Martin Luther King Jr."
+      </>
+    ),
+  },
+];
+
+const tocTemp = [
+  {
+    label: "Overview",
+    subHeadings: [
+      "Overview",
+      "Introduction",
+      "First Step: Tools and Objects",
+      "Second Step: Packing and Carry",
+      "Final Step: Necessary Carry",
+    ],
+  },
+  {
+    label: "Interpretation and Definitions",
+    subHeadings: [
+      "Overview",
+      "Introduction",
+      "First Step: Tools and Objects",
+      "Second Step: Packing and Carry",
+      "Final Step: Necessary Carry",
+    ],
+  },
+  {
+    label: "Links to Other Websites",
+    subHeadings: [
+      "Overview",
+      "Introduction",
+      "First Step: Tools and Objects",
+      "Second Step: Packing and Carry",
+      "Final Step: Necessary Carry",
+    ],
+  },
+  {
+    label: "Final Conclusion",
+    subHeadings: [
+      "Overview",
+      "Introduction",
+      "First Step: Tools and Objects",
+      "Second Step: Packing and Carry",
+      "Final Step: Necessary Carry",
+    ],
+  },
+];
 
 export default function ToolboxPostPage() {
-  const navigate = useNavigate();
-
   return (
     <PageMainContentsLayoutCmp>
       <PageSectionLayoutCmp title="Toolbox" footer={<Footer />}>
@@ -42,7 +119,14 @@ export default function ToolboxPostPage() {
             <Divider />
           </Box>
         </Box>
-        {/* TODO: make body */}
+        <Box display="flex" px={10} mt={4} columnGap={16}>
+          <Box flex={1}>
+            <PostDataCmp />
+          </Box>
+          <Box flexShrink={0}>
+            <TableOfContentsCmp />
+          </Box>
+        </Box>
       </PageSectionLayoutCmp>
     </PageMainContentsLayoutCmp>
   );
@@ -59,5 +143,106 @@ function Footer() {
         Download as PDF
       </Button>
     </>
+  );
+}
+
+function TableOfContentsCmp() {
+  const [selected, setSelected] = React.useState(0);
+
+  return (
+    <Box
+      display="flex"
+      flexDirection="column"
+      rowGap={3}
+      borderLeft="1px solid rgba(33, 33, 33, 0.32)"
+      py={4}
+      pl={4}
+    >
+      {tocTemp.map((el, idx) => (
+        <TocItem
+          key={idx}
+          id={idx}
+          label={el.label}
+          selected={idx === selected}
+          subHeadings={el.subHeadings}
+          onClick={() => setSelected(idx)}
+        />
+      ))}
+    </Box>
+  );
+}
+
+function TocItem({ id, label, selected, subHeadings, onClick }) {
+  return (
+    <Box>
+      <Box display="flex" alignItems="center" sx={{ cursor: "pointer" }} onClick={onClick}>
+        <Box display="flex" justifyContent="center" width={80}>
+          <RadioCmp selected={selected} />
+        </Box>
+        <Typography fontWeight={selected && 700} color={selected ? "primary.main" : "text.light"}>
+          {label}
+        </Typography>
+      </Box>
+      {selected && (
+        <Box pt={2} display="flex" flexDirection="column" rowGap={1}>
+          {subHeadings.map((el, idx) => (
+            <TocSubItem key={idx} selected={idx < 3} label={el} />
+          ))}
+        </Box>
+      )}
+    </Box>
+  );
+}
+
+function TocSubItem({ selected, label }) {
+  return (
+    <Box display="flex" alignItems="center">
+      <Box display="flex" justifyContent="center" width={80}>
+        <Box
+          width={8}
+          height={8}
+          bgcolor={selected ? "primary.main" : "secondary.main"}
+          borderRadius={8}
+        />
+      </Box>
+      <Typography
+        variant="body2"
+        fontWeight={selected && 700}
+        color={selected ? "primary.main" : "text.light"}
+      >
+        {label}
+      </Typography>
+    </Box>
+  );
+}
+
+function PostDataCmp() {
+  return (
+    <Box>
+      {trackerData.map((el, idx) => (
+        <PostDataItemCmp key={idx} heading={el.heading} content={el.content} selected={idx === 0} />
+      ))}
+    </Box>
+  );
+}
+
+function PostDataItemCmp({ heading, content, selected }) {
+  return (
+    <Box>
+      <Box display="flex" alignItems="center">
+        <Box display="flex" width={40}>
+          <RadioCmp selected={selected} />
+        </Box>
+        <Typography variant="h5Alt" fontWeight={600}>
+          {heading}
+        </Typography>
+      </Box>
+      <Box display="flex">
+        <Box display="flex" width={10} flexShrink={0} />
+        <Box pl="30px" borderLeft="1px solid rgba(225, 225, 225, 1)" pt={3} pb={6}>
+          <Typography>{content}</Typography>
+        </Box>
+      </Box>
+    </Box>
   );
 }

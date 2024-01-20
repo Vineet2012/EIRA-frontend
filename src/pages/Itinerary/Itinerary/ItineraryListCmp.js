@@ -6,6 +6,7 @@ import {
   LocationIconCmp,
   TimeIconCmp,
 } from "../../../components/Icons";
+import RadioCmp from "../../../components/RadioCmp";
 
 export default function ItineraryListCmp() {
   return (
@@ -68,22 +69,7 @@ function CardCmp({ selected, image }) {
   return (
     <Box display="flex" alignItems="center">
       <Box display="flex" justifyContent="center" mr={2}>
-        {selected ? (
-          <Box
-            height={20}
-            width={20}
-            borderRadius={16}
-            bgcolor="primary.main"
-            flexShrink={0}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Box height={8} width={8} borderRadius={16} bgcolor="secondary.main" flexShrink={0} />
-          </Box>
-        ) : (
-          <Box height={20} width={20} borderRadius={16} bgcolor="secondary.main" flexShrink={0} />
-        )}
+        <RadioCmp selected={selected} />
       </Box>
       <Box display="flex" alignItems="center" columnGap={2}>
         <Box height={120} borderRadius={4} overflow="hidden">
