@@ -2,14 +2,13 @@ import { Box, Button, Tab, Tabs } from "@mui/material";
 import {
   ActivityIconCmp,
   CheckIconCmp,
-  GuideIconCmp,
   SettingsGearIconCmp,
   WorkshopIconCmp,
 } from "../../components/Icons";
 import { PageMainContentsLayoutCmp, PageSectionLayoutCmp } from "../../components/Layouts";
 import { usePageStepHook } from "../../hooks/usePageStepHook";
+import AdminPageAccommodationCmp from "./adminPageAccommodationCmp";
 import AdminPageActivityCmp from "./adminPageActivityCmp";
-import AdminPageGuideCmp from "./adminPageGuideCmp";
 import AdminPageWorkshopCmp from "./adminPageWorkshopCmp";
 
 export default function AdminPage() {
@@ -24,9 +23,8 @@ export default function AdminPage() {
             [
               <AdminPageActivityCmp />,
               <AdminPageWorkshopCmp />,
-              <AdminPageGuideCmp />,
-              // <CollaborationSettingsCmp />,
-              // <CollaborationSettingsCmp />,
+              <AdminPageAccommodationCmp />,
+              <>Hello Retreat!!!</>,
             ][stepNo]
           }
         </Box>
@@ -41,8 +39,8 @@ function TabsCmp({ value, handleChange }) {
       <Tabs value={value} onChange={handleChange} aria-label="icon position tabs example">
         <Tab icon={<ActivityIconCmp />} iconPosition="start" label="Activity" />
         <Tab icon={<WorkshopIconCmp />} iconPosition="start" label="Workshop" />
-        <Tab icon={<GuideIconCmp />} iconPosition="start" label="Guide" />
-        <Tab icon={<SettingsGearIconCmp />} iconPosition="start" label="Accomodation" />
+        <Tab icon={<SettingsGearIconCmp />} iconPosition="start" label="Accommodation" />
+        <Tab icon={<SettingsGearIconCmp />} iconPosition="start" label="Connoisseur" />
         <Tab icon={<SettingsGearIconCmp />} iconPosition="start" label="Retreat" />
       </Tabs>
     </Box>

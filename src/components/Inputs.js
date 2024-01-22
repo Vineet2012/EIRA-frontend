@@ -1,4 +1,13 @@
-import { Box, Button, IconButton, MenuItem, Select, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Chip,
+  IconButton,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { ChevronArrowIconCmp, CrossIconCmp, SearchIconCmp } from "./Icons";
 
@@ -145,7 +154,7 @@ export function TextFieldWithLabelCmp({
   );
 }
 
-export function DropdownCmp({ label, options = [], value }) {
+export function DropdownCmp({ label, options = [], multiple, value, onChange }) {
   return (
     <Box flex={1}>
       <Typography fontWeight={500} color="text.light">
@@ -156,11 +165,22 @@ export function DropdownCmp({ label, options = [], value }) {
       <Select
         fullWidth
         value={value}
-        onChange={() => {}}
+        onChange={onChange}
         sx={{
           borderRadius: 4,
           color: "#212121",
         }}
+        multiple={multiple}
+        renderValue={
+          multiple &&
+          ((selected) => (
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+              {selected?.map((value) => (
+                <Chip key={value} label={options.find((el) => el.id === value).cmp} />
+              ))}
+            </Box>
+          ))
+        }
         IconComponent={ChevronArrowIconCmp}
       >
         {options.map((el, idx) => (

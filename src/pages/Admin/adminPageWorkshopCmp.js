@@ -5,7 +5,7 @@ import { TextFieldWithLabelCmp } from "../../components/Inputs";
 
 export default function AdminPageWorkshopCmp() {
   return (
-    <Box>
+    <Box display="flex" flexDirection="column" rowGap={4}>
       <Box display="flex" alignItems="center" columnGap={4}>
         <Box flex={1}>
           <TextFieldWithLabelCmp label="Workshop Name" placeholder="Workshop Name" />
@@ -14,27 +14,38 @@ export default function AdminPageWorkshopCmp() {
           <TextFieldWithLabelCmp label="Workshop Description" placeholder="Workshop Description" />
         </Box>
       </Box>
-      <Box display="flex" alignItems="center" columnGap={4} mt={3}>
+      <Box display="flex" alignItems="center" columnGap={4}>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Start Date" placeholder="DD/MM/YYYY" />
+          <TextFieldWithLabelCmp label="Location" placeholder="Location" />
         </Box>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="End Date" placeholder="DD/MM/YYYY" />
+          <TextFieldWithLabelCmp label="Duration" placeholder="Duration" />
         </Box>
       </Box>
-      <Box flex={1} mt={3}>
-        <Typography fontWeight={500} color="text.light">
-          Upload Picture
-        </Typography>
-        <Box pt={1} />
-        <Button
-          variant="outlined"
-          startIcon={<UploadIconCmp />}
-          sx={{ color: "text.light", fontWeight: 500 }}
-        >
-          Upload
-        </Button>
+      <Box display="flex" columnGap={4}>
+        <Box flex={1}>
+          <Typography fontWeight={500} color="text.light">
+            Workshop Image
+          </Typography>
+          <Box pt={1} />
+          <Button
+            variant="outlined"
+            fullWidth
+            startIcon={<UploadIconCmp />}
+            sx={{ color: "text.light", fontWeight: 500, padding: 1.8 }}
+          >
+            Upload
+          </Button>
+        </Box>
+        <Box flex={1}>
+          <TextFieldWithLabelCmp label="Workshop Type" placeholder="Workshop Type" />
+        </Box>
       </Box>
+      {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DemoContainer components={["DatePicker"]}>
+          <DatePicker label="Basic date picker" />
+        </DemoContainer>
+      </LocalizationProvider> */}
     </Box>
   );
 }
