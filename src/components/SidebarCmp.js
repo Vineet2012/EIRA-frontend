@@ -12,6 +12,7 @@ import { styled } from "@mui/material/styles";
 import * as React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
+  AdminIconCmp,
   ChevronArrowIconCmp,
   CreateRetreatIconCmp,
   HomeIconCmp,
@@ -32,6 +33,7 @@ const menuItems = [
     pathname: "create-retreat",
   },
   { type: "item", label: "my trips", icon: MyTripsIconCmp, pathname: "my-trips" },
+  { type: "item", label: "admin", icon: AdminIconCmp, pathname: "admin" },
   { type: "item", label: "shop", icon: ShopIconCmp, pathname: "shop" },
   { type: "divider" },
   {

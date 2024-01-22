@@ -16,7 +16,6 @@ import {
   ChevronArrowIconCmp,
   GuideIconCmp,
   MembersIconCmp,
-  PackagesIconCmp,
   StarCircleIconCmp,
   WorkshopIconCmp,
 } from "../../components/Icons";
@@ -25,7 +24,6 @@ import ChooseTimeDialog from "./ChooseTimeDialog";
 import ShopPageActivityCmp from "./ShopPageActivityCmp";
 import ShopPageContextProvider, { ShopPageContext } from "./ShopPageContext";
 import ShopPageGuideCmp from "./ShopPageGuideCmp";
-import ShopPagePackagesCmp from "./ShopPagePackagesCmp";
 import ShopPageWorkshopCmp from "./ShopPageWorkshopCmp";
 
 export default function ShopPage() {
@@ -57,7 +55,7 @@ function ShopPageMain() {
                     <ShopPageActivityCmp />,
                     <ShopPageWorkshopCmp />,
                     <ShopPageGuideCmp />,
-                    <ShopPagePackagesCmp />,
+                    // <ShopPagePackagesCmp />,
                   ][stepNo]
                 }
               </Box>
@@ -131,7 +129,7 @@ function MenuCmp({ selected, onSelect }) {
         { icon: ActivityIconCmp, label: "Activity" },
         { icon: WorkshopIconCmp, label: "Workshop" },
         { icon: GuideIconCmp, label: "Guide" },
-        { icon: PackagesIconCmp, label: "Packages" },
+        // { icon: PackagesIconCmp, label: "Packages" },
       ].map((el, idx) => (
         <MenuItemCmp
           key={idx}

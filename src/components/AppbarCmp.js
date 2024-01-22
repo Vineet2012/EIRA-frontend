@@ -5,20 +5,43 @@ import {
   ChevronArrowIconCmp,
   CreateRetreatIconCmp,
   InfoIconCmp,
+  LogOutIconSvg,
   NotificationIconCmp,
+  ProfileIconSvg,
+  SubscriptionIconSvg,
   TransferIconCmp,
 } from "./Icons";
 
 export default function AppbarCmp() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorE2, setAnchorE2] = React.useState(null);
+  const [anchorE3, setAnchorE3] = React.useState(null);
   const open = Boolean(anchorEl);
+  const open2 = Boolean(anchorE2);
+  const open3 = Boolean(anchorE3);
 
   const handleOpenMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleOpenMenuSwitchMember = (event) => {
+    setAnchorE2(event.currentTarget);
+  };
+
+  const handleOpenMenuProfile = (event) => {
+    setAnchorE3(event.currentTarget);
+  };
+
   const handleCloseMenu = () => {
     setAnchorEl(null);
+  };
+
+  const handleCloseMenuSwitchMember = () => {
+    setAnchorE2(null);
+  };
+
+  const handleCloseMenuProfile = () => {
+    setAnchorE3(null);
   };
 
   return (
@@ -30,8 +53,8 @@ export default function AppbarCmp() {
           </Button>
         </Box>
         <Box display="flex" alignItems="center" columnGap={2}>
-          <SwitchMemberCmp />
-          <ProfileCmp />
+          <SwitchMemberCmp openMenu={handleOpenMenuSwitchMember} />
+          <ProfileCmp openMenu={handleOpenMenuProfile} />
           <Box display="flex">
             <IconButton size="small" onClick={handleOpenMenu}>
               <NotificationIconCmp color={open ? "primary" : "default"} />
@@ -40,11 +63,17 @@ export default function AppbarCmp() {
         </Box>
       </Box>
       <NotificationsPopupCmp open={open} anchorEl={anchorEl} handleClose={handleCloseMenu} />
+      <SwitchMemberPopupCmp
+        anchorE2={anchorE2}
+        open2={open2}
+        onClose2={handleCloseMenuSwitchMember}
+      />
+      <ProfilePopupCmp anchorE3={anchorE3} open3={open3} onClose3={handleCloseMenuProfile} />
     </Box>
   );
 }
 
-function SwitchMemberCmp() {
+function SwitchMemberCmp({ openMenu }) {
   return (
     <Box display="flex" alignItems="center">
       <Box display="flex" alignItems="center" columnGap={1}>
@@ -59,16 +88,98 @@ function SwitchMemberCmp() {
           Switch to Member
         </Typography>
       </Box>
-      <Box ml={1}>
+      <IconButton size="small" onClick={openMenu} sx={{ marginLeft: 0.5 }}>
         <InfoIconCmp sx={{ fontSize: 14 }} />
-      </Box>
+      </IconButton>
     </Box>
   );
 }
 
-function ProfileCmp() {
+function SwitchMemberPopupCmp({ open2, anchorE2, onClose2 }) {
+  return (
+    <Menu
+      anchorEl={anchorE2}
+      open={open2}
+      onClose={onClose2}
+      elevation={3}
+      PaperProps={{
+        elevation: 0,
+        sx: {
+          overflow: "visible",
+          filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+          mt: 1.5,
+          "& .MuiAvatar-root": {
+            width: 32,
+            height: 32,
+            ml: -0.5,
+            mr: 1,
+          },
+          "&::before": {
+            content: '""',
+            display: "block",
+            position: "absolute",
+            top: 0,
+            right: 14,
+            width: 10,
+            height: 10,
+            bgcolor: "background.paper",
+            transform: "translateY(-50%) rotate(45deg)",
+            zIndex: 0,
+          },
+        },
+      }}
+      transformOrigin={{ horizontal: "right", vertical: "top" }}
+      anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+    >
+      <Box>
+        <Box p={2}>
+          <Typography
+            fontSize={12}
+            fontWeight={400}
+            fontFamily="Inter"
+            color="primary"
+            lineHeight="14.52px"
+          >
+            Event participant, eager to
+            <br /> engage and enjoy.
+          </Typography>
+          <Box
+            display="flex"
+            alignItems="center"
+            columnGap={1}
+            p={1}
+            bgcolor="rgb(225, 236, 200,0.48)"
+            borderRadius="10px"
+            mt={1}
+          >
+            <TransferIconCmp fontSize="small" color="primary" />
+            <Typography
+              fontSize={12}
+              fontFamily="Inter"
+              color="primary"
+              fontWeight={700}
+              component="a"
+              sx={{ textDecoration: "underline" }}
+            >
+              Switch to Member
+            </Typography>
+          </Box>
+        </Box>
+        <Divider />
+        <Box sx={{ padding: "16px 16px 8px 16px" }}>
+          <Typography fontSize={12} fontWeight={400} fontFamily="Inter">
+            Currently in Admin mode
+          </Typography>
+        </Box>
+      </Box>
+    </Menu>
+  );
+}
+
+function ProfileCmp({ openMenu }) {
   return (
     <Box
+      onClick={openMenu}
       bgcolor="white"
       p={1}
       display="flex"
@@ -90,9 +201,120 @@ function ProfileCmp() {
   );
 }
 
+function ProfilePopupCmp({ open3, anchorE3, onClose3 }) {
+  return (
+    <Menu
+      anchorEl={anchorE3}
+      open={open3}
+      onClose={onClose3}
+      elevation={3}
+      PaperProps={{
+        elevation: 0,
+        sx: {
+          overflow: "visible",
+          filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+          mt: 1.5,
+          "& .MuiAvatar-root": {
+            width: 32,
+            height: 32,
+            ml: -0.5,
+            mr: 1,
+          },
+          "&::before": {
+            content: '""',
+            display: "block",
+            position: "absolute",
+            top: 0,
+            right: 14,
+            width: 10,
+            height: 10,
+            bgcolor: "background.paper",
+            transform: "translateY(-50%) rotate(45deg)",
+            zIndex: 0,
+          },
+        },
+      }}
+      transformOrigin={{ horizontal: "right", vertical: "top" }}
+      anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+    >
+      <Box>
+        <Box p={2}>
+          <Box display="flex" columnGap={2} sx={{ cursor: "pointer" }}>
+            <ProfileIconSvg />
+            <Typography
+              fontSize="16px"
+              fontWeight={400}
+              fontFamily="Inter"
+              color=" rgba(33, 33, 33, 0.48)"
+            >
+              My Profile
+            </Typography>
+          </Box>
+          <Box display="flex" mt={2} columnGap={2} sx={{ cursor: "pointer" }}>
+            <SubscriptionIconSvg />
+            <Typography
+              fontSize="16px"
+              fontWeight={400}
+              fontFamily="Inter"
+              color=" rgba(33, 33, 33, 0.48)"
+            >
+              Subscription
+            </Typography>
+          </Box>
+        </Box>
+        <Divider />
+        <Box display="flex" columnGap={2} p={2} sx={{ cursor: "pointer" }}>
+          <LogOutIconSvg />
+          <Typography
+            fontSize="16px"
+            fontWeight={400}
+            fontFamily="Inter"
+            color="rgba(221, 0, 0, 1)"
+          >
+            Logout
+          </Typography>
+        </Box>
+      </Box>
+    </Menu>
+  );
+}
+
 function NotificationsPopupCmp({ open, anchorEl, handleClose }) {
   return (
-    <Menu anchorEl={anchorEl} open={open} onClose={handleClose} elevation={3}>
+    <Menu
+      anchorEl={anchorEl}
+      open={open}
+      onClose={handleClose}
+      elevation={3}
+      PaperProps={{
+        elevation: 0,
+        sx: {
+          overflow: "visible",
+          filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+          mt: 1.5,
+          "& .MuiAvatar-root": {
+            width: 32,
+            height: 32,
+            ml: -0.5,
+            mr: 1,
+          },
+          "&::before": {
+            content: '""',
+            display: "block",
+            position: "absolute",
+            top: 0,
+            right: 14,
+            width: 10,
+            height: 10,
+            bgcolor: "background.paper",
+            transform: "translateY(-50%) rotate(45deg)",
+            zIndex: 0,
+          },
+        },
+      }}
+      transformOrigin={{ horizontal: "right", vertical: "top" }}
+      anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+    >
       NOTE: Unable to get design details from Figma, that's why left 'un-styled'
       <Box>
         <Box pl={3} pt={2}>

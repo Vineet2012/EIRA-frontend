@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import AuthCmp from "./components/AuthCmp";
 import GeneralLayoutCmp from "./components/GeneralLayouCmp";
 import ScrollToTopCmp from "./components/ScrollToTopCmp";
+import AdminPage from "./pages/Admin/adminPage";
 import CreateRetreatPage from "./pages/CreateRetreat/CreateRetreatPage";
 import HomePage from "./pages/Home/HomePage";
 import ItineraryPage from "./pages/Itinerary/ItineraryPage";
@@ -36,6 +37,7 @@ export default function App() {
             <Route path="" element={<MyTripsPage />} />
             <Route path="itinerary/:tripId" element={<ItineraryPage />} />
           </Route>
+          <Route path="admin" element={<AdminPage />} />
           <Route path="shop" element={<ShopPage />} />
           <Route path="toolbox">
             <Route path="" element={<ToolboxPage />} />
