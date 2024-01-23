@@ -1,4 +1,5 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import React from "react";
 import { UploadIconCmp } from "../../components/Icons";
 import { TextFieldWithLabelCmp } from "../../components/Inputs";
@@ -11,7 +12,32 @@ export default function AdminPageActivityCmp() {
           <TextFieldWithLabelCmp label="Activity Name" placeholder="Activity Name" />
         </Box>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Activity Description" placeholder="Activity Description" />
+          <TextFieldWithLabelCmp
+            label="Activity Contact Name"
+            placeholder="Activity Contact Name"
+          />
+        </Box>
+      </Box>
+      <Box display="flex" alignItems="center" columnGap={4}>
+        <Box flex={1}>
+          <TextFieldWithLabelCmp
+            label="Activity Contact Number"
+            placeholder="Activity Contact Number"
+          />
+        </Box>
+        <Box flex={1}>
+          <TextFieldWithLabelCmp
+            label="Activity Provider Name"
+            placeholder="Activity Provider Name"
+          />
+        </Box>
+      </Box>
+      <Box display="flex" alignItems="center" columnGap={4}>
+        <Box flex={1}>
+          <TextFieldWithLabelCmp label="Description Long" placeholder="Description Long" />
+        </Box>
+        <Box flex={1}>
+          <TextFieldWithLabelCmp label="Description Short" placeholder="Description Short" />
         </Box>
       </Box>
       <Box display="flex" alignItems="center" columnGap={4}>
@@ -20,6 +46,39 @@ export default function AdminPageActivityCmp() {
         </Box>
         <Box flex={1}>
           <TextFieldWithLabelCmp label="Duration" placeholder="Duration" />
+        </Box>
+      </Box>
+      <Box display="flex" columnGap={4} width="100%">
+        <Box flex={1}>
+          <Typography fontWeight={500} color="text.light">
+            Availability
+          </Typography>
+          <Box pt={1} />
+          <DateRangePicker
+            disablePast
+            label="Start Date"
+            sx={{ width: "100%" }}
+            // value={value}
+            // maxDate={getWeeksAfter(value[0], 4)}
+            // onChange={(newValue) => {
+            //   setValue(newValue);
+            // }}
+            renderInput={(startProps, endProps) => (
+              <React.Fragment>
+                <TextField {...startProps} />
+                <Box sx={{ mx: 2 }}> to </Box>
+                <TextField {...endProps} />
+              </React.Fragment>
+            )}
+          />
+        </Box>
+      </Box>
+      <Box display="flex" alignItems="center" columnGap={4}>
+        <Box flex={1}>
+          <TextFieldWithLabelCmp label="Price" placeholder="Price" />
+        </Box>
+        <Box flex={1}>
+          <TextFieldWithLabelCmp label="Activity Type" placeholder="Activity Type" />
         </Box>
       </Box>
       <Box display="flex" columnGap={4}>
@@ -37,15 +96,7 @@ export default function AdminPageActivityCmp() {
             Upload
           </Button>
         </Box>
-        <Box flex={1}>
-          <TextFieldWithLabelCmp label="Activity Type" placeholder="Activity Type" />
-        </Box>
       </Box>
-      {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DemoContainer components={["DatePicker"]}>
-          <DatePicker label="Basic date picker" />
-        </DemoContainer>
-      </LocalizationProvider> */}
     </Box>
   );
 }

@@ -9,6 +9,9 @@ import { PageMainContentsLayoutCmp, PageSectionLayoutCmp } from "../../component
 import { usePageStepHook } from "../../hooks/usePageStepHook";
 import AdminPageAccommodationCmp from "./adminPageAccommodationCmp";
 import AdminPageActivityCmp from "./adminPageActivityCmp";
+import AdminPageConnoisseurCmp from "./adminPageConnoisseurCmp";
+import AdminPageFinalRetreatCmp from "./adminPageFinalRetreatCmp";
+import AdminpageProposalCmp from "./adminPageProposalCmp";
 import AdminPageWorkshopCmp from "./adminPageWorkshopCmp";
 
 export default function AdminPage() {
@@ -16,7 +19,7 @@ export default function AdminPage() {
 
   return (
     <PageMainContentsLayoutCmp>
-      <PageSectionLayoutCmp title="Settings" footer={<Footer />}>
+      <PageSectionLayoutCmp title="Admin" footer={<Footer />}>
         <TabsCmp value={stepNo} handleChange={(_, newVal) => handleJump(newVal)} />
         <Box mt={4}>
           {
@@ -24,7 +27,9 @@ export default function AdminPage() {
               <AdminPageActivityCmp />,
               <AdminPageWorkshopCmp />,
               <AdminPageAccommodationCmp />,
-              <>Hello Retreat!!!</>,
+              <AdminPageConnoisseurCmp />,
+              <AdminpageProposalCmp />,
+              <AdminPageFinalRetreatCmp />,
             ][stepNo]
           }
         </Box>
@@ -41,7 +46,8 @@ function TabsCmp({ value, handleChange }) {
         <Tab icon={<WorkshopIconCmp />} iconPosition="start" label="Workshop" />
         <Tab icon={<SettingsGearIconCmp />} iconPosition="start" label="Accommodation" />
         <Tab icon={<SettingsGearIconCmp />} iconPosition="start" label="Connoisseur" />
-        <Tab icon={<SettingsGearIconCmp />} iconPosition="start" label="Retreat" />
+        <Tab icon={<SettingsGearIconCmp />} iconPosition="start" label="Proposal" />
+        <Tab icon={<SettingsGearIconCmp />} iconPosition="start" label="Final Retreat" />
       </Tabs>
     </Box>
   );

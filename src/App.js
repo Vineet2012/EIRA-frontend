@@ -1,3 +1,5 @@
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { Route, Routes } from "react-router-dom";
 import AuthCmp from "./components/AuthCmp";
 import GeneralLayoutCmp from "./components/GeneralLayouCmp";
@@ -27,7 +29,7 @@ import ToolboxTopicPage from "./pages/Toolbox/ToolboxTopicPage";
 
 export default function App() {
   return (
-    <>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
       <Routes>
         <Route path="/" element={<GeneralLayoutCmp />}>
           <Route path="" element={<AuthCmp />} />
@@ -62,6 +64,6 @@ export default function App() {
         </Route>
       </Routes>
       <ScrollToTopCmp />
-    </>
+    </LocalizationProvider>
   );
 }

@@ -2,36 +2,27 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import React from "react";
 import { UploadIconCmp } from "../../components/Icons";
-import { TextFieldWithLabelCmp } from "../../components/Inputs";
+import { DropdownCmp, TextFieldWithLabelCmp } from "../../components/Inputs";
+import { useMultipleSelectHook } from "../../hooks/useMultipleSelectHook";
 
-export default function AdminPageWorkshopCmp() {
+export default function AdminPageConnoisseurCmp() {
+  const { state: city, handleChange: handleChangeCity } = useMultipleSelectHook();
   return (
     <Box display="flex" flexDirection="column" rowGap={4}>
       <Box display="flex" alignItems="center" columnGap={4}>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Workshop Name" placeholder="Workshop Name" />
+          <TextFieldWithLabelCmp label="Name" placeholder="Name" />
         </Box>
         <Box flex={1}>
-          <TextFieldWithLabelCmp
-            label="Workshop Provider Name"
-            placeholder="Workshop Provider Name"
-          />
+          <TextFieldWithLabelCmp label="Eira Title" placeholder="Eira Title" />
         </Box>
       </Box>
       <Box display="flex" alignItems="center" columnGap={4}>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Short Description" placeholder="Short Description" />
+          <TextFieldWithLabelCmp label="Description" placeholder="Description" />
         </Box>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Long Description" placeholder="Long Description" />
-        </Box>
-      </Box>
-      <Box display="flex" alignItems="center" columnGap={4}>
-        <Box flex={1}>
-          <TextFieldWithLabelCmp label="Location" placeholder="Location" />
-        </Box>
-        <Box flex={1}>
-          <TextFieldWithLabelCmp label="Duration" placeholder="Duration" />
+          <TextFieldWithLabelCmp label="Contact Number" placeholder="Contact Number" />
         </Box>
       </Box>
       <Box display="flex" columnGap={4} width="100%">
@@ -61,24 +52,20 @@ export default function AdminPageWorkshopCmp() {
       </Box>
       <Box display="flex" alignItems="center" columnGap={4}>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Contact Number" placeholder="Contact Number" />
+          <TextFieldWithLabelCmp label="Country" placeholder="Country" />
         </Box>
-        <Box flex={1}>
-          <TextFieldWithLabelCmp label="Price" placeholder="Price" />
-        </Box>
+        <DropdownCmp
+          label="What this place offers"
+          multiple
+          options={cityOptions}
+          value={city}
+          onChange={handleChangeCity}
+        />
       </Box>
       <Box display="flex" alignItems="center" columnGap={4}>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Time Slots" placeholder="Time Slots" />
-        </Box>
-        <Box flex={1}>
-          <TextFieldWithLabelCmp label="Workshop Type" placeholder="Workshop Type" />
-        </Box>
-      </Box>
-      <Box display="flex" columnGap={4}>
-        <Box flex={1}>
           <Typography fontWeight={500} color="text.light">
-            Workshop Image
+            Image
           </Typography>
           <Box pt={1} />
           <Button
@@ -90,12 +77,18 @@ export default function AdminPageWorkshopCmp() {
             Upload
           </Button>
         </Box>
+        <Box flex={1}>
+          <TextFieldWithLabelCmp label="Price" placeholder="Price" />
+        </Box>
       </Box>
-      {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DemoContainer components={["DatePicker"]}>
-          <DatePicker label="Basic date picker" />
-        </DemoContainer>
-      </LocalizationProvider> */}
     </Box>
   );
 }
+
+const cityOptions = [
+  { id: 0, cmp: "Paris" },
+  { id: 1, cmp: "Shanghai" },
+  { id: 2, cmp: "London" },
+  { id: 3, cmp: "Seoul" },
+  { id: 4, cmp: "Tokyo" },
+];
