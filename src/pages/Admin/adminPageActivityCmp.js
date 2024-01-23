@@ -2,9 +2,11 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import React from "react";
 import { UploadIconCmp } from "../../components/Icons";
-import { TextFieldWithLabelCmp } from "../../components/Inputs";
+import { DropdownCmp, TextFieldWithLabelCmp } from "../../components/Inputs";
+import { useMultipleSelectHook } from "../../hooks/useMultipleSelectHook";
 
 export default function AdminPageActivityCmp() {
+  const { state: timeSlot, handleChange: handleChangeTimeSlots } = useMultipleSelectHook();
   return (
     <Box display="flex" flexDirection="column" rowGap={4}>
       <Box display="flex" alignItems="center" columnGap={4}>
@@ -75,13 +77,22 @@ export default function AdminPageActivityCmp() {
       </Box>
       <Box display="flex" alignItems="center" columnGap={4}>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Price" placeholder="Price" />
+          <DropdownCmp
+            label="Available Time Slots"
+            multiple
+            options={timeSlotOptions}
+            value={timeSlot}
+            onChange={handleChangeTimeSlots}
+          />
         </Box>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Activity Type" placeholder="Activity Type" />
+          <TextFieldWithLabelCmp label="Price" placeholder="Price" />
         </Box>
       </Box>
       <Box display="flex" columnGap={4}>
+        <Box flex={1}>
+          <TextFieldWithLabelCmp label="Activity Type" placeholder="Activity Type" />
+        </Box>
         <Box flex={1}>
           <Typography fontWeight={500} color="text.light">
             Activity Image
@@ -100,3 +111,11 @@ export default function AdminPageActivityCmp() {
     </Box>
   );
 }
+
+const timeSlotOptions = [
+  { id: 0, cmp: "10:00 AM - 12:00 PM" },
+  { id: 1, cmp: "12:00 PM - 14:00 PM" },
+  { id: 2, cmp: "15:00 PM - 17:00 PM" },
+  { id: 3, cmp: "17:00 PM - 19:00 PM" },
+  { id: 4, cmp: "19:00 PM - 21:00 PM" },
+];

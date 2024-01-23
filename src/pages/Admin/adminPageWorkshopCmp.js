@@ -2,9 +2,11 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import React from "react";
 import { UploadIconCmp } from "../../components/Icons";
-import { TextFieldWithLabelCmp } from "../../components/Inputs";
+import { DropdownCmp, TextFieldWithLabelCmp } from "../../components/Inputs";
+import { useMultipleSelectHook } from "../../hooks/useMultipleSelectHook";
 
 export default function AdminPageWorkshopCmp() {
+  const { state: timeSlot, handleChange: handleChangeTimeSlots } = useMultipleSelectHook();
   return (
     <Box display="flex" flexDirection="column" rowGap={4}>
       <Box display="flex" alignItems="center" columnGap={4}>
@@ -69,7 +71,13 @@ export default function AdminPageWorkshopCmp() {
       </Box>
       <Box display="flex" alignItems="center" columnGap={4}>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Time Slots" placeholder="Time Slots" />
+          <DropdownCmp
+            label="Available Time Slots"
+            multiple
+            options={timeSlotOptions}
+            value={timeSlot}
+            onChange={handleChangeTimeSlots}
+          />
         </Box>
         <Box flex={1}>
           <TextFieldWithLabelCmp label="Workshop Type" placeholder="Workshop Type" />
@@ -91,11 +99,14 @@ export default function AdminPageWorkshopCmp() {
           </Button>
         </Box>
       </Box>
-      {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DemoContainer components={["DatePicker"]}>
-          <DatePicker label="Basic date picker" />
-        </DemoContainer>
-      </LocalizationProvider> */}
     </Box>
   );
 }
+
+const timeSlotOptions = [
+  { id: 0, cmp: "10:00 AM - 12:00 PM" },
+  { id: 1, cmp: "12:00 PM - 14:00 PM" },
+  { id: 2, cmp: "15:00 PM - 17:00 PM" },
+  { id: 3, cmp: "17:00 PM - 19:00 PM" },
+  { id: 4, cmp: "19:00 PM - 21:00 PM" },
+];

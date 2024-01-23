@@ -64,6 +64,9 @@ export default function AdminPageConnoisseurCmp() {
       </Box>
       <Box display="flex" alignItems="center" columnGap={4}>
         <Box flex={1}>
+          <TextFieldWithLabelCmp label="Price" placeholder="Price" />
+        </Box>
+        <Box flex={1}>
           <Typography fontWeight={500} color="text.light">
             Image
           </Typography>
@@ -76,9 +79,6 @@ export default function AdminPageConnoisseurCmp() {
           >
             Upload
           </Button>
-        </Box>
-        <Box flex={1}>
-          <TextFieldWithLabelCmp label="Price" placeholder="Price" />
         </Box>
       </Box>
     </Box>
