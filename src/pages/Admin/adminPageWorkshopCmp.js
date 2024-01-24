@@ -84,14 +84,13 @@ export default function AdminPageWorkshopCmp() {
         </Box>
       </Box>
       <Box display="flex" columnGap={4}>
-        <Box flex={1}>
+        <Box>
           <Typography fontWeight={500} color="text.light">
             Workshop Image
           </Typography>
           <Box pt={1} />
           <Button
             variant="outlined"
-            fullWidth
             startIcon={<UploadIconCmp />}
             sx={{ color: "text.light", fontWeight: 500, padding: 1.8 }}
           >

@@ -1,4 +1,4 @@
-import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
+import { Box, Button, Divider, IconButton, Menu, Typography } from "@mui/material";
 import React from "react";
 import { IconWithTextSimpleChipCmp } from "../../components/Chips";
 import {
@@ -45,10 +45,10 @@ function HeroSectionCmp() {
   );
 }
 
-function RetreatsCmp() {
+function RetreatsCmp({ openMenu }) {
   return (
     <PageSectionLayoutCmp title="Upcoming Retreats">
-      <CalendarCmp />
+      <CalendarCmp openMenu={openMenu} />
       <Box display="flex" mt={4} columnGap={4}>
         <Box display="flex" flexDirection="column" rowGap={2}>
           <RetreatListItemCmp teamName={"Design team"} date={"10"} />
@@ -62,6 +62,26 @@ function RetreatsCmp() {
 }
 
 function CalendarCmp() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [year, setYear] = React.useState(2023);
+  const open = Boolean(anchorEl);
+
+  const handleOpenMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
+  function nextYear() {
+    setYear(year + 1);
+  }
+
+  function previousYear() {
+    setYear(year - 1);
+  }
+
   return (
     <Box display="flex" color="text.light">
       <Box
@@ -86,10 +106,10 @@ function CalendarCmp() {
         justifyContent="center"
         pt={2}
       >
-        <Box sx={{ cursor: "pointer" }} display="flex" columnGap={1}>
+        <Box sx={{ cursor: "pointer" }} display="flex" columnGap={1} onClick={handleOpenMenu}>
           <CalendarIconCmp />
           <Typography variant="body1" fontWeight={500} color="inherit">
-            2023
+            {year}
           </Typography>
           <ChevronArrowIconCmp />
         </Box>
@@ -104,7 +124,115 @@ function CalendarCmp() {
       >
         <ChevronArrowIconCmp direction="right" />
       </Box>
+      <CalendarDialogCmp
+        open={open}
+        anchorEl={anchorEl}
+        handleClose={handleCloseMenu}
+        year={year}
+        nextYear={nextYear}
+        previousYear={previousYear}
+      />
     </Box>
+  );
+}
+
+function CalendarDialogCmp({ open, anchorEl, handleClose, year, nextYear, previousYear }) {
+  return (
+    <Menu
+      anchorEl={anchorEl}
+      open={open}
+      onClose={handleClose}
+      elevation={3}
+      PaperProps={{
+        elevation: 0,
+        sx: {
+          overflow: "visible",
+          filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+          mt: 1.5,
+          "& .MuiAvatar-root": {
+            width: 32,
+            height: 32,
+            ml: -0.5,
+            mr: 1,
+          },
+          "&::before": {
+            content: '""',
+            display: "block",
+            position: "absolute",
+            top: 0,
+            right: 50,
+            width: 10,
+            height: 10,
+            bgcolor: "background.paper",
+            transform: "translateY(-50%) rotate(45deg)",
+            zIndex: 0,
+          },
+        },
+      }}
+      transformOrigin={{ horizontal: "right", vertical: "top" }}
+      anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+    >
+      <Box p={2}>
+        <Box
+          onClick={previousYear}
+          bgcolor="#F6F6F6"
+          display="flex"
+          justifyContent="center"
+          p={1}
+          alignItems="center"
+          borderRadius={3}
+          sx={{ cursor: "pointer" }}
+        >
+          <ChevronArrowIconCmp direction="up" />
+        </Box>
+        <Box mt={2} mb={2}>
+          <Typography
+            fontWeight={400}
+            fontSize="16px"
+            fontFamily="Inter"
+            textAlign="center"
+            sx={{ opacity: "48%" }}
+          >
+            {year - 1}
+          </Typography>
+          <Box
+            bgcolor="rgba(225, 236, 200, 0.6)"
+            borderRadius={100}
+            mt={1}
+            mb={1}
+            pl={2}
+            pr={2}
+            pt={1}
+            pb={1}
+          >
+            <Typography fontWeight={700} fontSize="20px" fontFamily="Inter" color="primary.main">
+              {year}
+            </Typography>
+          </Box>
+          <Typography
+            fontWeight={400}
+            fontSize="16px"
+            fontFamily="Inter"
+            textAlign="center"
+            sx={{ opacity: "48%" }}
+          >
+            {year + 1}
+          </Typography>
+        </Box>
+        <Box
+          onClick={nextYear}
+          bgcolor="#F6F6F6"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          p={1}
+          borderRadius={3}
+          sx={{ cursor: "pointer" }}
+        >
+          <ChevronArrowIconCmp direction="below" />
+        </Box>
+      </Box>
+    </Menu>
   );
 }
 

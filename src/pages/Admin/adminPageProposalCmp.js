@@ -96,14 +96,13 @@ export default function AdminpageProposalCmp() {
         </Box>
       </Box>
       <Box display="flex" alignItems="center" columnGap={4}>
-        <Box flex={1}>
+        <Box>
           <Typography fontWeight={500} color="text.light">
             Image Upload
           </Typography>
           <Box pt={1} />
           <Button
             variant="outlined"
-            fullWidth
             startIcon={<UploadIconCmp />}
             sx={{ color: "text.light", fontWeight: 500, padding: 1.8 }}
           >
