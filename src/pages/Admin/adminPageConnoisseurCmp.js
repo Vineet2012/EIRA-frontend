@@ -19,7 +19,7 @@ export default function AdminPageConnoisseurCmp() {
       </Box>
       <Box display="flex" alignItems="center" columnGap={4}>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Description" placeholder="Description" />
+          <TextFieldWithLabelCmp label="Description" placeholder="Description" multiline />
         </Box>
         <Box flex={1}>
           <TextFieldWithLabelCmp label="Contact Number" placeholder="Contact Number" />

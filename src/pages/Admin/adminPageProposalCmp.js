@@ -30,10 +30,18 @@ export default function AdminpageProposalCmp() {
       </Box>
       <Box display="flex" alignItems="center" columnGap={4}>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Short Description" placeholder="Short Description" />
+          <TextFieldWithLabelCmp
+            label="Short Description"
+            placeholder="Short Description"
+            multiline
+          />
         </Box>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Long Description" placeholder="Long Description" />
+          <TextFieldWithLabelCmp
+            label="Long Description"
+            placeholder="Long Description"
+            multiline
+          />
         </Box>
       </Box>
       <Box display="flex" alignItems="center" columnGap={4}>

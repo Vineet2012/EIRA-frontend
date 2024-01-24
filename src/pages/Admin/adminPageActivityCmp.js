@@ -36,10 +36,18 @@ export default function AdminPageActivityCmp() {
       </Box>
       <Box display="flex" alignItems="center" columnGap={4}>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Description Long" placeholder="Description Long" />
+          <TextFieldWithLabelCmp
+            label="Description Long"
+            placeholder="Description Long"
+            multiline
+          />
         </Box>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Description Short" placeholder="Description Short" />
+          <TextFieldWithLabelCmp
+            label="Description Short"
+            placeholder="Description Short"
+            multiline
+          />
         </Box>
       </Box>
       <Box display="flex" alignItems="center" columnGap={4}>
