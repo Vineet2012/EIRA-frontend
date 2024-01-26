@@ -1,10 +1,17 @@
 import { Box, TextField, Typography } from "@mui/material";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import React from "react";
-import { DropdownCmp, TextFieldWithLabelCmp } from "../../components/Inputs";
+import { useParams } from "react-router-dom";
+import { SearchIconCmp } from "../../components/Icons";
+import {
+  DropdownCmp,
+  TextFieldWithDropdownCmp,
+  TextFieldWithLabelCmp,
+} from "../../components/Inputs";
 import { useMultipleSelectHook } from "../../hooks/useMultipleSelectHook";
 
 export default function AdminPageAccommodationCmp() {
+  const { search } = useParams();
   const { state: places, handleChange: handleChangePlaces } = useMultipleSelectHook();
   const { state: offering, handleChange: handleChangeOffering } = useMultipleSelectHook();
   const { state: policies, handleChange: handleChangePolicies } = useMultipleSelectHook();
@@ -12,7 +19,30 @@ export default function AdminPageAccommodationCmp() {
     <Box display="flex" flexDirection="column" rowGap={4}>
       <Box display="flex" alignItems="center" columnGap={4}>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Hotel Name" placeholder="Hotel Name" />
+          <Typography fontWeight={500} color="text.light" pb={1.3}>
+            Hotel Name
+          </Typography>
+          <TextFieldWithDropdownCmp
+            placeholder="Hotel Name"
+            actionText="See all results for "
+            resultsHeading="Suggestions"
+            defaultValue={search}
+            results={[
+              {
+                icon: <SearchIconCmp fontSize="small" sx={{ color: "text.light" }} />,
+                text: "A Modern Design Hotel above the Ocean",
+              },
+              {
+                icon: <SearchIconCmp fontSize="small" sx={{ color: "text.light" }} />,
+                text: "A taste of sea with a touch of land",
+              },
+              {
+                icon: <SearchIconCmp fontSize="small" sx={{ color: "text.light" }} />,
+                text: "Wellness Amenities",
+              },
+            ]}
+            onClickAction={() => {}}
+          />
         </Box>
         <Box flex={1}>
           <TextFieldWithLabelCmp label="Eira Title" placeholder="Eira Title" />

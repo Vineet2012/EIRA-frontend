@@ -69,6 +69,7 @@ function FormCmp() {
             bgcolor="background.dark"
             placeholder="Create or Search Retreat"
             resultsHeading="Suggestions"
+            border="none"
             results={[
               {
                 icon: (

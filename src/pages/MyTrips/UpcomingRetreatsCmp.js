@@ -1,16 +1,20 @@
 import { Box, Button, Typography } from "@mui/material";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IconWithTextSimpleChipCmp } from "../../components/Chips";
 import { ArrowHorizontalIconCmp, CalendarIconCmp } from "../../components/Icons";
 import { myTripsDBTemp } from "../../temp/myTripsDBTemp";
+import AboutPlaceDialogCmp from "../CreateRetreat/AboutPlaceDialogCmp";
 
 export default function UpcomingRetreatsCmp() {
+  const [open, setOpen] = React.useState(false);
   return (
     <Box>
       <Typography variant="h5">Upcoming Retreats</Typography>
       <Box display="flex" flexDirection="column" rowGap={2} mt={2}>
         {myTripsDBTemp.map((el, idx) => (
           <CardCmp
+            onClickInfo={() => setOpen(true)}
             key={idx}
             id={el.id}
             image={el.images[0]}
@@ -23,15 +27,16 @@ export default function UpcomingRetreatsCmp() {
           />
         ))}
       </Box>
+      <AboutPlaceDialogCmp open={open} handleClose={() => setOpen(false)} />
     </Box>
   );
 }
 
-function CardCmp({ image, title, team, duration, month, day, dates, id }) {
+function CardCmp({ image, title, team, duration, month, day, dates, id, onClickInfo }) {
   const navigate = useNavigate();
 
   return (
-    <Box display="flex" alignItems="center" px={3} py={2} columnGap={4}>
+    <Box display="flex" alignItems="center" px={3} py={2} columnGap={4} onClick={onClickInfo}>
       <Box display="flex" alignItems="center" columnGap={2} flexShrink={0} width={240}>
         <Box textAlign="center">
           <Typography variant="body2" color="text.light">

@@ -1,9 +1,16 @@
 import { Remove } from "@mui/icons-material";
-import { Box, Grid, IconButton, Typography } from "@mui/material";
+import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
 import React from "react";
 import { IconWithTextSimpleChipCmp } from "../../../components/Chips";
-import { CalendarIconCmp, LaunchIconCmp } from "../../../components/Icons";
+import {
+  AddIconCmp,
+  ArrowHorizontalIconCmp,
+  CalendarIconCmp,
+  LaunchIconCmp,
+  SurfingIconCmp,
+} from "../../../components/Icons";
 import { time24HToAmPm } from "../../../utils/formatters";
+import AddEventDialogCmp from "./addEventDialogCmp";
 
 const cellHeight = 48;
 const headerHeight = 60;
@@ -19,44 +26,73 @@ const startDate = new Date().getDate();
 const startDay = new Date().getDay();
 
 export default function ItineraryCalendarCmp() {
+  const [openDialog, setOpenDialog] = React.useState(false);
   return (
-    <Box bgcolor="rgba(245, 251, 245, 1)">
-      <Box display="flex">
-        <Box display="flex" flexDirection="column" flexShrink={0}>
-          {[...new Array(timePerDay + 1)].map((_, idx) => (
-            <TimeCellCmp key={idx} time={idx === 0 ? -1 : startTime + idx - 1} mt={idx === 1} />
-          ))}
-        </Box>
-        <Grid container>
-          {[...new Array(maxDates)].map((_, idx) => (
-            <DateHeadingCmp
-              key={idx}
-              date={(startDate + idx) % 31 ?? 1}
-              day={(startDay + idx) % 7}
-            />
-          ))}
-
-          {[...new Array(1000)].map((_, idx) => {
-            if (idx >= cellsPerDate * maxDates) return null;
-
-            const currDate = startDate + Math.floor(idx % maxDates);
-            const currTime = startTime + Math.floor(idx / maxDates);
-
-            const match = events.find((el) => el.date === currDate && el.time === currTime);
-            if (match?.blank) return null;
-
-            return (
-              <CellCmp
+    <Box>
+      <Box bgcolor="rgba(245, 251, 245, 1)">
+        <Box display="flex">
+          <Box display="flex" flexDirection="column" flexShrink={0}>
+            {[...new Array(timePerDay + 1)].map((_, idx) => (
+              <TimeCellCmp key={idx} time={idx === 0 ? -1 : startTime + idx - 1} mt={idx === 1} />
+            ))}
+          </Box>
+          <Grid container>
+            {[...new Array(maxDates)].map((_, idx) => (
+              <DateHeadingCmp
                 key={idx}
-                temp={idx === 15}
-                data={match?.data}
-                span={match?.span}
-                mt={currTime === startTime}
+                date={(startDate + idx) % 31 ?? 1}
+                day={(startDay + idx) % 7}
               />
-            );
-          })}
-        </Grid>
+            ))}
+
+            {[...new Array(1000)].map((_, idx) => {
+              if (idx >= cellsPerDate * maxDates) return null;
+
+              const currDate = startDate + Math.floor(idx % maxDates);
+              const currTime = startTime + Math.floor(idx / maxDates);
+
+              const match = events.find((el) => el.date === currDate && el.time === currTime);
+              if (match?.blank) return null;
+
+              return (
+                <CellCmp
+                  key={idx}
+                  temp={idx === 15}
+                  data={match?.data}
+                  span={match?.span}
+                  mt={currTime === startTime}
+                />
+              );
+            })}
+          </Grid>
+        </Box>
       </Box>
+      <Box
+        bgcolor="secondary.main"
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        pr={0.5}
+        pl={2}
+        py={0.5}
+        m={4}
+        borderRadius={4}
+      >
+        <Typography variant="body2" fontWeight={700} color="primary.main">
+          End of the day - Spend your day at leisure or Add an activity
+        </Typography>
+        <Box display="flex" columnGap={2}>
+          <Box bgcolor="#fff" borderRadius={3} onClick={() => setOpenDialog(true)}>
+            <Button startIcon={<AddIconCmp />}>Add a event</Button>
+          </Box>
+          <Box bgcolor="#fff" borderRadius={3}>
+            <Button startIcon={<SurfingIconCmp />} endIcon={<ArrowHorizontalIconCmp />}>
+              Browse activites
+            </Button>
+          </Box>
+        </Box>
+      </Box>
+      <AddEventDialogCmp open={openDialog} handleClose={() => setOpenDialog(false)} />
     </Box>
   );
 }

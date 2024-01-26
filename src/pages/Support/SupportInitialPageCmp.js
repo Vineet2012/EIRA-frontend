@@ -44,6 +44,7 @@ function HeaderCmp() {
           resultsHeading="Suggestions"
           results={[]}
           onClickAction={() => navigate("search string")}
+          border="none"
         />
         <Box display="flex" alignItems="flex-start" columnGap={2}>
           <Typography fontWeight={500} lineHeight="28px">

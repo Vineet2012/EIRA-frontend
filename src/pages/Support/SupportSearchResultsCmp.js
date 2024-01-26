@@ -30,6 +30,7 @@ export default function SupportSearchResultsCmp() {
               actionText="See all results for "
               resultsHeading="Suggestions"
               defaultValue={search}
+              border="none"
               results={[
                 {
                   icon: <SearchIconCmp fontSize="small" sx={{ color: "text.light" }} />,

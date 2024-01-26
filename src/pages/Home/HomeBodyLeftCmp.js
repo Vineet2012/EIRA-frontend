@@ -244,7 +244,7 @@ function RetreatListItemCmp({ isSelected, teamName, date }) {
       bgcolor={isSelected && "#f6f6f6"}
       px={3}
       py={2}
-      borderRadius={4}
+      borderRadius="32px 100px 100px 32px"
       columnGap={3}
     >
       <Box textAlign="center">

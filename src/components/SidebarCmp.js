@@ -33,7 +33,6 @@ const menuItems = [
     pathname: "create-retreat",
   },
   { type: "item", label: "my trips", icon: MyTripsIconCmp, pathname: "my-trips" },
-  { type: "item", label: "admin", icon: AdminIconCmp, pathname: "admin" },
   { type: "item", label: "shop", icon: ShopIconCmp, pathname: "shop" },
   { type: "divider" },
   {
@@ -45,6 +44,8 @@ const menuItems = [
   { type: "divider" },
   { type: "item", label: "toolbox", icon: ToolboxIconCmp, pathname: "toolbox" },
   { type: "item", label: "support", icon: SupportIconCmp, pathname: "support" },
+  { type: "divider" },
+  { type: "item", label: "admin", icon: AdminIconCmp, pathname: "admin" },
 ];
 
 export default function SidebarCmp() {

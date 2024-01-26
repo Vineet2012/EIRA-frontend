@@ -142,7 +142,7 @@ function RightCmp() {
   };
 
   return (
-    <Box border="1px solid rgba(196, 223, 182, 1)" borderRadius="16px 16px 0 0">
+    <Box borderRadius="16px 16px 0 0">
       <Box
         bgcolor="secondary.main"
         p={2}

@@ -1,17 +1,46 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import React from "react";
-import { UploadIconCmp } from "../../components/Icons";
-import { DropdownCmp, TextFieldWithLabelCmp } from "../../components/Inputs";
+import { useParams } from "react-router-dom";
+import { SearchIconCmp, UploadIconCmp } from "../../components/Icons";
+import {
+  DropdownCmp,
+  TextFieldWithDropdownCmp,
+  TextFieldWithLabelCmp,
+} from "../../components/Inputs";
 import { useMultipleSelectHook } from "../../hooks/useMultipleSelectHook";
 
 export default function AdminPageActivityCmp() {
+  const { search } = useParams();
   const { state: timeSlot, handleChange: handleChangeTimeSlots } = useMultipleSelectHook();
   return (
     <Box display="flex" flexDirection="column" rowGap={4}>
       <Box display="flex" alignItems="center" columnGap={4}>
         <Box flex={1}>
-          <TextFieldWithLabelCmp label="Activity Name" placeholder="Activity Name" />
+          <Typography fontWeight={500} color="text.light" pb={1.3}>
+            Activity Name
+          </Typography>
+          <TextFieldWithDropdownCmp
+            placeholder="Activity Name"
+            actionText="See all results for "
+            resultsHeading="Suggestions"
+            defaultValue={search}
+            results={[
+              {
+                icon: <SearchIconCmp fontSize="small" sx={{ color: "text.light" }} />,
+                text: "Horse Riding",
+              },
+              {
+                icon: <SearchIconCmp fontSize="small" sx={{ color: "text.light" }} />,
+                text: "Skiing",
+              },
+              {
+                icon: <SearchIconCmp fontSize="small" sx={{ color: "text.light" }} />,
+                text: "Spa and sauna",
+              },
+            ]}
+            onClickAction={() => {}}
+          />
         </Box>
         <Box flex={1}>
           <TextFieldWithLabelCmp

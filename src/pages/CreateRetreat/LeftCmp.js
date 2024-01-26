@@ -9,6 +9,7 @@ export default function LeftCmp() {
         placeholder="Create or Search Retreat"
         actionText="Create new retreat"
         resultsHeading="Your Retreats"
+        border="none"
         results={[
           {
             icon: <SearchIconCmp fontSize="small" sx={{ color: "text.light" }} />,

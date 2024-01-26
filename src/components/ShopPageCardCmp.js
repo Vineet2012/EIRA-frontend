@@ -4,6 +4,7 @@ import { IconWithTextSimpleChipCmp } from "./Chips";
 import { AddIconCmp, CalendarIconCmp, CheckIconCmp, LocationIconCmp, TimeIconCmp } from "./Icons";
 
 export default function ShopPageCardCmp({
+  onClick,
   title,
   content,
   image,
@@ -15,7 +16,7 @@ export default function ShopPageCardCmp({
   time,
 }) {
   return (
-    <Box display="flex" alignItems="center" columnGap={4}>
+    <Box display="flex" alignItems="center" columnGap={4} onClick={onClick}>
       <Box
         maxWidth={{ md: 180, lg: 240 }}
         height={{ md: 120, lg: 120 }}

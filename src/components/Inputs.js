@@ -2,7 +2,7 @@ import {
   Box,
   Button,
   Chip,
-  IconButton,
+  InputAdornment,
   MenuItem,
   Select,
   TextField,
@@ -20,6 +20,7 @@ export function TextFieldWithDropdownCmp({
   autoFocus,
   onClickAction,
   defaultValue,
+  border,
 }) {
   const [isFocus, setFocus] = React.useState(false);
   const [value, setValue] = React.useState(defaultValue ?? "");
@@ -34,34 +35,45 @@ export function TextFieldWithDropdownCmp({
   return (
     <Box
       bgcolor={bgcolor}
-      px={2}
       borderRadius={4}
       display="flex"
       alignItems="center"
       boxShadow={isFocus && "0px 4px 28px -24px #000000"}
       position="relative"
     >
-      <IconButton onClick={() => inputRef.current.focus()}>
-        <SearchIconCmp sx={{ color: "text.light" }} fontSize="small" />
-      </IconButton>
       <TextField
         inputRef={inputRef}
         fullWidth
+        variant="outlined"
         defaultValue={defaultValue}
-        sx={{ border: "none", "& fieldset": { border: "none" } }}
+        sx={{ border: border, "& fieldset": { border: border } }}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         autoFocus={autoFocus}
         placeholder={placeholder}
         onChange={(e) => setValue(e.target.value)}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end" onClick={handleClearInput} sx={{ cursor: "pointer" }}>
+              <CrossIconCmp sx={{ color: "text.light" }} fontSize="small" />
+            </InputAdornment>
+          ),
+          startAdornment: (
+            <InputAdornment
+              position="start"
+              onClick={() => inputRef.current.focus()}
+              sx={{ cursor: "pointer" }}
+            >
+              <SearchIconCmp sx={{ color: "text.light" }} fontSize="small" />
+            </InputAdornment>
+          ),
+        }}
       />
-      <IconButton size="small" onClick={handleClearInput}>
-        <CrossIconCmp sx={{ color: "text.light" }} fontSize="small" />
-      </IconButton>
       {(isFocus || value) && (
         <Box
           position="absolute"
           top="4em"
+          zIndex={1}
           left={0}
           width="100%"
           bgcolor="background.main"
@@ -79,7 +91,13 @@ export function TextFieldWithDropdownCmp({
               </Typography>
               <Box mt={2} display="flex" flexDirection="column" rowGap={1}>
                 {results.map((el, idx) => (
-                  <Box key={idx} display="flex" alignItems="center" columnGap={2}>
+                  <Box
+                    key={idx}
+                    display="flex"
+                    alignItems="center"
+                    columnGap={2}
+                    sx={{ cursor: "pointer" }}
+                  >
                     {el.icon}
                     <Typography>{el.text}</Typography>
                   </Box>
