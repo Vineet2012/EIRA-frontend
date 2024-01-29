@@ -1,4 +1,4 @@
-import { IconButton, Typography } from "@mui/material";
+import { IconButton, Menu, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
@@ -17,6 +17,7 @@ import {
   CreateRetreatIconCmp,
   HomeIconCmp,
   MyTripsIconCmp,
+  SelectedIconSvg,
   SettingsIconCmp,
   ShopIconCmp,
   SupportIconCmp,
@@ -39,7 +40,8 @@ const menuItems = [
     type: "item",
     label: "organisational settings",
     icon: SettingsIconCmp,
-    pathname: "settings?tab=0",
+    // pathname: "settings?tab=0",
+    pathname: "settings",
   },
   { type: "divider" },
   { type: "item", label: "toolbox", icon: ToolboxIconCmp, pathname: "toolbox" },
@@ -50,8 +52,27 @@ const menuItems = [
 
 export default function SidebarCmp() {
   const [open, setOpen] = React.useState(false);
+  const [anchorE3, setAnchorE3] = React.useState(null);
+  const [selectedLangId, setSelectedLangId] = React.useState(3);
+  const [selectedLang, setSelectedLang] = React.useState("English");
+  const [selectedLangShort, setSelectedLangShort] = React.useState("En");
   const navigate = useNavigate();
   const location = useLocation();
+  const open3 = Boolean(anchorE3);
+
+  const handleCloseLanguageMenu = () => {
+    setAnchorE3(null);
+  };
+
+  function handleSelectedLang(id, lang, short) {
+    setSelectedLangId(id);
+    setSelectedLang(lang);
+    setSelectedLangShort(short);
+  }
+
+  const handleOpenLanguageMenu = (event) => {
+    setAnchorE3(event.currentTarget);
+  };
 
   const currPath = React.useMemo(() => location.pathname.split("/")[1], [location]);
 
@@ -129,12 +150,134 @@ export default function SidebarCmp() {
               </ListItem>
             );
           })}
+          <Box
+            display="flex"
+            ml={open ? 3 : 1.5}
+            columnGap={0.3}
+            mt={8}
+            sx={{ opacity: "48%", cursor: "pointer" }}
+            alignItems="center"
+            onClick={handleOpenLanguageMenu}
+          >
+            {open ? (
+              <Typography fontWeight={400} fontSize="18px" fontFamily="Inter">
+                {selectedLang}
+              </Typography>
+            ) : (
+              <Typography fontWeight={400} fontSize="18px" fontFamily="Inter">
+                {selectedLangShort}
+              </Typography>
+            )}
+            <ChevronArrowIconCmp />
+          </Box>
         </List>
       </Drawer>
+      <LanguageSelectionPopupCmp
+        anchorE3={anchorE3}
+        open3={open3}
+        onClose3={handleCloseLanguageMenu}
+        handleSelectedLang={handleSelectedLang}
+        selectedLang={selectedLangId}
+      />
     </Box>
   );
 }
 
+const language = [
+  {
+    id: 1,
+    lang: "French",
+    langShort: "Fr",
+  },
+  {
+    id: 2,
+    lang: "Spanish",
+    langShort: "Sp",
+  },
+  {
+    id: 3,
+    lang: "English",
+    langShort: "En",
+  },
+  {
+    id: 4,
+    lang: "German",
+    langShort: "Ge",
+  },
+  {
+    id: 5,
+    lang: "Chinese",
+    langShort: "Ch",
+  },
+];
+
+function LanguageSelectionPopupCmp({
+  open3,
+  anchorE3,
+  onClose3,
+  handleSelectedLang,
+  selectedLang,
+}) {
+  return (
+    <Menu
+      anchorEl={anchorE3}
+      open={open3}
+      onClose={onClose3}
+      elevation={3}
+      PaperProps={{
+        elevation: 0,
+        sx: {
+          overflow: "visible",
+          filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+          mt: 0,
+          width: "250px",
+          "& .MuiAvatar-root": {
+            width: 32,
+            height: 32,
+            ml: -0.5,
+            mr: 1,
+          },
+          "&::before": {
+            content: '""',
+            display: "block",
+            position: "absolute",
+            bottom: -6,
+            left: 14,
+            width: 10,
+            height: 10,
+            bgcolor: "background.paper",
+            transform: "translateY(-0%) rotate(45deg)",
+            zIndex: 0,
+          },
+        },
+      }}
+      transformOrigin={{ horizontal: "left", vertical: "bottom" }}
+      anchorOrigin={{ horizontal: "left", vertical: "top" }}
+    >
+      <Box p={2}>
+        {language.map((el) => {
+          return (
+            <Box
+              sx={{ cursor: "pointer", transition: "0.1s" }}
+              display="flex"
+              justifyContent="space-between"
+              p={1}
+              key={el.id}
+              onClick={() => handleSelectedLang(el.id, el.lang, el.langShort)}
+              bgcolor={selectedLang === el.id ? "rgba(225, 236, 200, 0.4)" : ""}
+              borderRadius="8px"
+            >
+              <Typography fontWeight={400} fontSize="16px" fontFamily="Inter">
+                {el.lang}
+              </Typography>
+              {selectedLang === el.id ? <SelectedIconSvg /> : <></>}
+            </Box>
+          );
+        })}
+      </Box>
+    </Menu>
+  );
+}
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {

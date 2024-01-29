@@ -37,7 +37,13 @@ function HeroSectionCmp() {
             <Button endIcon={<ArrowHorizontalIconCmp />}>Get Started</Button>
           </Box>
         </Box>
-        <Box position="absolute" bottom="-2.5em" right={8} height="16em">
+        <Box
+          position="absolute"
+          bottom="-2.5em"
+          right={8}
+          height="16em"
+          display={{ xs: "none", lg: "flex" }}
+        >
           <img src="/images/home-page-1.png" style={{ height: "100%" }} />
         </Box>
       </Box>
@@ -273,7 +279,7 @@ function RetreatCardCmp() {
         <img
           style={{
             width: "100%",
-            maxHeight: "100%",
+            minHeight: "100%",
             objectFit: "cover",
           }}
           src="https://www.telegraph.co.uk/content/dam/Travel/hotels/2021/April/tivoli-carvoeiro-algarve-portugal-pr-p.jpg"

@@ -164,7 +164,17 @@ function CultureToolboxCardCmp({ icon, label }) {
           </Box>
           <LaunchIconCmp color="primary" />
         </Box>
-        <Typography variant="body1" fontWeight={700} color="primary">
+        <Typography
+          variant="body1"
+          fontWeight={700}
+          color="primary"
+          sx={{
+            display: "-webkit-box",
+            overflow: "hidden",
+            WebkitBoxOrient: "vertical",
+            WebkitLineClamp: 1,
+          }}
+        >
           {label}
         </Typography>
         <Typography variant="body2">

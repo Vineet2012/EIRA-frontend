@@ -9,8 +9,11 @@ export default function CreateRetreatStep1Cmp() {
 
   return (
     <Box display="flex" justifyContent="center" alignItems="center" columnGap={12} p={10}>
-      <Box flex={1}>
-        <img style={{ height: 300 }} src="/images/create-retreat-1.png" />
+      <Box flex={1} width="100%" height="100%">
+        <img
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          src="/images/create-retreat-1.png"
+        />
       </Box>
       <Box flex={1} bgcolor="secondary.main" px={3} py={6} borderRadius={4} textAlign="center">
         <Typography variant="h4Alt" color="primary" fontWeight={700}>

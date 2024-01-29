@@ -65,12 +65,13 @@ export default function ItineraryListCmp() {
         pl={2}
         py={0.5}
         m={2}
+        columnGap={2}
         borderRadius={4}
       >
         <Typography variant="body2" fontWeight={700} color="primary.main">
           End of the day - Spend your day at leisure or Add an activity
         </Typography>
-        <Box bgcolor="#fff" borderRadius={3}>
+        <Box bgcolor="#fff" borderRadius={3} flexShrink={0}>
           <Button endIcon={<ArrowHorizontalIconCmp />}>Browse activites</Button>
         </Box>
       </Box>
@@ -174,6 +175,7 @@ function CardActivityCmp({ selected, image, onClickInfo }) {
                 backgroundColor: "rgba(196, 223, 182, 1)",
                 padding: "4px 10px 4px 10px",
                 borderRadius: 100,
+                flexShrink: 0,
                 "&:hover": { backgroundColor: "rgba(196, 223, 182, 1)" },
               }}
             >

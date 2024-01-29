@@ -37,7 +37,7 @@ function CardCmp({ image, title, team, duration, month, day, dates, id, onClickI
 
   return (
     <Box display="flex" alignItems="center" px={3} py={2} columnGap={4} onClick={onClickInfo}>
-      <Box display="flex" alignItems="center" columnGap={2} flexShrink={0} width={240}>
+      <Box display="flex" alignItems="center" columnGap={2} width={340}>
         <Box textAlign="center">
           <Typography variant="body2" color="text.light">
             {month}
@@ -76,7 +76,14 @@ function CardCmp({ image, title, team, duration, month, day, dates, id, onClickI
           <IconWithTextSimpleChipCmp icon={CalendarIconCmp} label={dates} />
         </Box>
       </Box>
-      <Box display="flex" alignItems="center" columnGap={3} flexShrink={0}>
+      <Box
+        display="flex"
+        flexDirection={{ md: "column", lg: "row" }}
+        rowGap={{ md: 2, lg: 0 }}
+        alignItems="center"
+        columnGap={3}
+        flexShrink={0}
+      >
         <Button variant="contained">Pay Now</Button>
         <Button
           variant="outlined"

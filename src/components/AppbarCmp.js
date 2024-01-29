@@ -289,6 +289,7 @@ function NotificationsPopupCmp({ open, anchorEl, handleClose }) {
       PaperProps={{
         elevation: 0,
         sx: {
+          width: "450px",
           overflow: "visible",
           filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
           mt: 1.5,
@@ -315,24 +316,23 @@ function NotificationsPopupCmp({ open, anchorEl, handleClose }) {
       transformOrigin={{ horizontal: "right", vertical: "top" }}
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
     >
-      NOTE: Unable to get design details from Figma, that's why left 'un-styled'
       <Box>
         <Box pl={3} pt={2}>
           <Typography variant="h5" fontWeight={600}>
             Notifications
           </Typography>
           {[...new Array(3)].map((_, idx) => (
-            <NotificationItemCmp key={idx} />
+            <NotificationItemCmp key={idx} idx={idx} />
           ))}
         </Box>
-        <Box bgcolor="#fbf7f3" p={2}>
+        <Box bgcolor="#fbf7f3" p={2} borderRadius="0px 0px 24px 24px">
           <Box
             sx={{ cursor: "pointer" }}
             display="flex"
             justifyContent="flex-end"
             alignItems="center"
           >
-            <Typography variant="paraMed" mr={1}>
+            <Typography variant="paraMed" p={1}>
               Read all
             </Typography>
             <CheckCircleOutlinedIcon sx={{ color: "primary.main" }} />
@@ -343,21 +343,43 @@ function NotificationsPopupCmp({ open, anchorEl, handleClose }) {
   );
 }
 
-function NotificationItemCmp() {
+function NotificationItemCmp({ idx }) {
   return (
-    <Box>
-      <Box pt={2} display="flex">
-        <Box>
-          <NotificationIconCmp />
-        </Box>
-        <Box display="flex" flexDirection="column" ml={1}>
-          <Typography variant="paraMed">Announcement</Typography>
-          <Typography mb={1} variant="para2Med" mt={1}>
-            Hey We've added a new location "Berlin, Germany"
-          </Typography>
-          <Typography mb={1} variant="paraReg" sx={{ opacity: "48%" }}>
-            Today at 9:42 AM
-          </Typography>
+    <Box mr={3}>
+      <Box bgcolor={idx === 1 ? "secondary.main" : undefined} p={1} borderRadius={3}>
+        <Box pt={2} display="flex">
+          <Box>
+            <NotificationIconCmp />
+          </Box>
+          <Box display="flex" flexDirection="column" ml={1} width="100%">
+            <Box display="flex" justifyContent="space-between" alignItems="center">
+              <Typography fontSize="16px" fontFamily="Inter" fontWeight={600} color="primary">
+                Announcement
+              </Typography>
+              <Box
+                borderRadius={100}
+                width="10px"
+                height="10px"
+                bgcolor="primary.main"
+                mr={2}
+              ></Box>
+            </Box>
+            <Typography fontSize="16px" fontWeight={500} fontFamily="Inter" mt={0.5} mb={0.5}>
+              Hey We've added a new location
+              <br /> "Berlin, Germany"
+            </Typography>
+            <Typography
+              variant="paraReg"
+              sx={{ opacity: "48%" }}
+              fontSize="14px"
+              fontFamily="Inter"
+              fontWeight={400}
+              mt={0.5}
+              mb={0.5}
+            >
+              Today at 9:42 AM
+            </Typography>
+          </Box>
         </Box>
       </Box>
       <Divider sx={{ margin: "8px 0px 8px 0px" }} />

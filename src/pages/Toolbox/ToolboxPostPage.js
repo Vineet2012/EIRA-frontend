@@ -95,8 +95,8 @@ export default function ToolboxPostPage() {
       <PageSectionLayoutCmp title="Toolbox" footer={<Footer />}>
         <Box display="flex" flexDirection="column" rowGap={6}>
           <BackButtonCmp />
-          <Box px={10} display="flex" alignItems="center" columnGap={10}>
-            <Box>
+          <Box px={{ md: 1, lg: 10 }} display="flex" alignItems="center" columnGap={10}>
+            <Box flex={1}>
               <Typography variant="h5" fontWeight={700} color="primary">
                 Mindfulness Journey
               </Typography>
@@ -111,16 +111,20 @@ export default function ToolboxPostPage() {
                 <IconWithTextSimpleChipCmp icon={TimeIconCmp} label="1-2 min read" />
               </Box>
             </Box>
-            <Box height={300}>
-              <img src="/images/toolbox-2.png" alt="mindful" style={{ height: "100%" }} />
+            <Box width="100%" height="100%" flex={1}>
+              <img
+                src="/images/toolbox-2.png"
+                alt="mindful"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
             </Box>
           </Box>
-          <Box px={10} pb={4}>
+          <Box px={{ md: 1, lg: 10 }} pb={4}>
             <Divider />
           </Box>
         </Box>
-        <Box display="flex" px={10} mt={4} columnGap={16}>
-          <Box flex={1}>
+        <Box display="flex" px={{ md: 1, lg: 10 }} mt={4} columnGap={16}>
+          <Box>
             <PostDataCmp />
           </Box>
           <Box flexShrink={0}>

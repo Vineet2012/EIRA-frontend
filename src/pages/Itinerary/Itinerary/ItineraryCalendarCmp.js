@@ -72,7 +72,7 @@ export default function ItineraryCalendarCmp() {
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        pr={0.5}
+        pr={{ md: 4, lg: 0.5 }}
         pl={2}
         py={0.5}
         m={4}
@@ -82,10 +82,10 @@ export default function ItineraryCalendarCmp() {
           End of the day - Spend your day at leisure or Add an activity
         </Typography>
         <Box display="flex" columnGap={2}>
-          <Box bgcolor="#fff" borderRadius={3} onClick={() => setOpenDialog(true)}>
+          <Box bgcolor="#fff" borderRadius={3} onClick={() => setOpenDialog(true)} flexShrink={0}>
             <Button startIcon={<AddIconCmp />}>Add a event</Button>
           </Box>
-          <Box bgcolor="#fff" borderRadius={3}>
+          <Box bgcolor="#fff" borderRadius={3} flexShrink={0}>
             <Button startIcon={<SurfingIconCmp />} endIcon={<ArrowHorizontalIconCmp />}>
               Browse activites
             </Button>

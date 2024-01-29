@@ -40,8 +40,14 @@ export default function AdminPage() {
 
 function TabsCmp({ value, handleChange }) {
   return (
-    <Box borderBottom="0.5px solid rgba(33, 33, 33, 0.32)">
-      <Tabs value={value} onChange={handleChange} aria-label="icon position tabs example">
+    <Box borderBottom="0.5px solid rgba(33, 33, 33, 0.32)" sx={{ maxWidth: { md: "84vw" } }}>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        aria-label="icon position tabs example"
+        variant="scrollable"
+        scrollButtons="auto"
+      >
         <Tab icon={<ActivityIconCmp />} iconPosition="start" label="Activity" />
         <Tab icon={<WorkshopIconCmp />} iconPosition="start" label="Workshop" />
         <Tab icon={<SettingsGearIconCmp />} iconPosition="start" label="Accommodation" />

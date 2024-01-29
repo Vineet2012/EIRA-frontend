@@ -8,12 +8,12 @@ export default function CreateRetreatStep4Cmp() {
   return (
     <>
       <Grid container>
-        <Grid item xs={5}>
+        <Grid item xs={5} display={{ xs: "none", lg: "flex" }}>
           <Box display="flex" alignItems="flex-end" height="100%" justifyContent="center">
             <img src="/images/create-retreat-3.png" alt="create reatreat" style={{ height: 360 }} />
           </Box>
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={{ xs: 12, lg: 7 }}>
           <Box>
             <FormCmp />
           </Box>
